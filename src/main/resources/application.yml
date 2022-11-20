@@ -1,0 +1,4 @@
+auth:
+  jwt-access-secret: "myAccessSecret"
+  jwt-access-expiration-time: 24h
+
