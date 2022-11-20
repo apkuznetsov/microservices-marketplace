@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.web.auth.configuration;
+package kuznetsov.marketplace.web.configuration;
 
 import java.io.IOException;
 import java.util.Set;
