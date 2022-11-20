@@ -1,7 +1,7 @@
-package kuznetsov.marketplace.database.auth;
+package kuznetsov.marketplace.database.user;
 
 import java.util.Optional;
-import kuznetsov.marketplace.domain.auth.User;
+import kuznetsov.marketplace.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

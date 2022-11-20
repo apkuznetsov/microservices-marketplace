@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.auth.exception;
+package kuznetsov.marketplace.services.user.exception;
 
 import kuznetsov.marketplace.services.exception.ServiceErrorCode;
 import lombok.Getter;

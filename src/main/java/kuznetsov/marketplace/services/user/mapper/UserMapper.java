@@ -1,7 +1,7 @@
-package kuznetsov.marketplace.services.auth.mapper;
+package kuznetsov.marketplace.services.user.mapper;
 
-import kuznetsov.marketplace.domain.auth.User;
-import kuznetsov.marketplace.services.auth.dto.UserDto;
+import kuznetsov.marketplace.domain.user.User;
+import kuznetsov.marketplace.services.user.dto.UserDto;
 
 public interface UserMapper {
 
