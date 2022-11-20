@@ -13,7 +13,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Base64;
 import java.util.Date;
-import kuznetsov.marketplace.services.auth.dto.UserCreateDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -38,9 +37,9 @@ public class JwtServiceDefault implements JwtService {
     this.expirationAccessTime = expirationAccessTime;
   }
 
-  public String createAccessToken(UserCreateDto authDto) {
-    Claims claims = Jwts.claims().setSubject(authDto.getEmail());
-    claims.put("role", authDto.getRole());
+  public String createAccessToken(String email, String role) {
+    Claims claims = Jwts.claims().setSubject(email);
+    claims.put("role", role);
 
     Instant issuedAt = Instant.now();
     Instant expireAt = issuedAt.plus(this.expirationAccessTime);
