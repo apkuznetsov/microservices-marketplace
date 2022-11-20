@@ -12,6 +12,7 @@ import kuznetsov.marketplace.services.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -42,30 +43,29 @@ public class JwtFilter extends OncePerRequestFilter {
     } else {
       token = null;
     }
-
     if (token == null
         || token.isEmpty()
         || !jwtService.validateAccessToken(token)) {
       return;
     }
 
-    UserDto user = userService
-        .getUserByEmail(
-            jwtService.getEmailFromAccessToken(token)
-        );
+    String userEmail = jwtService.getEmailFromAccessToken(token);
+    Set<SimpleGrantedAuthority> userRoles = Set.of(
+        new SimpleGrantedAuthority(
+            jwtService.getRoleFromAccessToken(token))
+    );
+    UserDto user = userService.getUserByEmail(userEmail);
     if (user.getIsBanned()
         || !user.getIsEmailConfirmed()) {
       return;
     }
 
+    Authentication auth = new UsernamePasswordAuthenticationToken(
+        userEmail,
+        null,
+        userRoles);
     SecurityContextHolder.getContext()
-        .setAuthentication(
-            new UsernamePasswordAuthenticationToken(
-                jwtService.getEmailFromAccessToken(token),
-                null,
-                Set.of(new SimpleGrantedAuthority(jwtService.getRoleFromAccessToken(token)))
-            )
-        );
+        .setAuthentication(auth);
   }
 
 }
