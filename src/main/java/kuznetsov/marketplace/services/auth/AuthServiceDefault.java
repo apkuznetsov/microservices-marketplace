@@ -23,11 +23,10 @@ public class AuthServiceDefault implements AuthService {
 
   @Override
   public AuthResponse login(AuthRequest authRequest) {
-    Authentication authentication = authenticationManager
-        .authenticate(
-            new UsernamePasswordAuthenticationToken(
-                authRequest.getEmail(), authRequest.getPassword())
-        );
+    Authentication authentication = authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(
+            authRequest.getEmail(), authRequest.getPassword())
+    );
 
     String userEmail = authRequest.getEmail();
     String userRole = Optional.of(
@@ -39,9 +38,8 @@ public class AuthServiceDefault implements AuthService {
         .orElseThrow(() -> new ServiceException(AUTH_ERROR))
         .toString();
 
-    String accessToken = jwtService
-        .createAccessToken(
-            userEmail, userRole);
+    String accessToken = jwtService.createAccessToken(
+        userEmail, userRole);
 
     return AuthResponse.builder()
         .type("Bearer")
