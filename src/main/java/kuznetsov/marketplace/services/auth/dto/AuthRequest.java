@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.user.dto;
+package kuznetsov.marketplace.services.auth.dto;
 
 import kuznetsov.marketplace.domain.user.UserRole;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserCreateDto {
+public class AuthRequest {
 
   private String email;
 
