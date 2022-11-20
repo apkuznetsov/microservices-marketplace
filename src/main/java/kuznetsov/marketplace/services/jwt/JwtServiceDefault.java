@@ -32,17 +32,17 @@ public class JwtServiceDefault implements JwtService {
 
     this.accessSecret = Base64.getEncoder()
         .encodeToString(
-            accessSecretKey.getBytes(StandardCharsets.UTF_8)
-        );
+            accessSecretKey.getBytes(StandardCharsets.UTF_8));
     this.expirationAccessTime = expirationAccessTime;
   }
 
   public String createAccessToken(String email, String role) {
-    Claims claims = Jwts.claims().setSubject(email);
+    Claims claims = Jwts.claims();
+    claims.setSubject(email);
     claims.put("role", role);
 
     Instant issuedAt = Instant.now();
-    Instant expireAt = issuedAt.plus(this.expirationAccessTime);
+    Instant expireAt = issuedAt.plus(expirationAccessTime);
 
     return Jwts.builder()
         .setClaims(claims)
