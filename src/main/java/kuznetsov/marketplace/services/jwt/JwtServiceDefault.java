@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.auth;
+package kuznetsov.marketplace.services.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -20,12 +20,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class JwtProviderDefault implements JwtProvider {
+public class JwtServiceDefault implements JwtService {
 
   private final String accessSecret;
   private final Duration expirationAccessTime;
 
-  public JwtProviderDefault(
+  public JwtServiceDefault(
       @Value("${auth.jwt-access-secret}")
       String accessSecretKey,
       @Value("${auth.jwt-access-expiration-time}")

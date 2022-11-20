@@ -6,9 +6,9 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import kuznetsov.marketplace.services.auth.JwtProvider;
 import kuznetsov.marketplace.services.auth.UserService;
 import kuznetsov.marketplace.services.auth.dto.UserDto;
+import kuznetsov.marketplace.services.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +22,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-  private final JwtProvider jwtProvider;
+  private final JwtService jwtService;
   private final UserService userService;
 
   @Override
@@ -45,13 +45,13 @@ public class JwtFilter extends OncePerRequestFilter {
 
     if (token == null
         || token.isEmpty()
-        || !jwtProvider.validateAccessToken(token)) {
+        || !jwtService.validateAccessToken(token)) {
       return;
     }
 
     UserDto user = userService
         .getUserByEmail(
-            jwtProvider.getEmailFromAccessToken(token)
+            jwtService.getEmailFromAccessToken(token)
         );
     if (user.getIsBanned()
         || !user.getIsEmailConfirmed()) {
@@ -61,9 +61,9 @@ public class JwtFilter extends OncePerRequestFilter {
     SecurityContextHolder.getContext()
         .setAuthentication(
             new UsernamePasswordAuthenticationToken(
-                jwtProvider.getEmailFromAccessToken(token),
+                jwtService.getEmailFromAccessToken(token),
                 null,
-                Set.of(new SimpleGrantedAuthority(jwtProvider.getRoleFromAccessToken(token)))
+                Set.of(new SimpleGrantedAuthority(jwtService.getRoleFromAccessToken(token)))
             )
         );
   }

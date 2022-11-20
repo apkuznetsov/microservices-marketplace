@@ -1,8 +1,8 @@
-package kuznetsov.marketplace.services.auth;
+package kuznetsov.marketplace.services.jwt;
 
 import kuznetsov.marketplace.services.auth.dto.UserCreateDto;
 
-public interface JwtProvider {
+public interface JwtService {
 
   String createAccessToken(UserCreateDto authDto);
 
