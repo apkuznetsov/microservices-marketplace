@@ -19,12 +19,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class JwtServiceDefault implements JwtService {
+public class JwtServiceImpl implements JwtService {
 
   private final String accessSecret;
   private final Duration expirationAccessTime;
 
-  public JwtServiceDefault(
+  public JwtServiceImpl(
       @Value("${auth.jwt-access-secret}")
       String accessSecretKey,
       @Value("${auth.jwt-access-expiration-time}")

@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AuthController {
 
-  public static final String AUTH_LOGIN_URL = "/api/v1/auth/login";
+  public static final String AUTH_URL = "/api/v1/auth";
 
   private final AuthService authService;
 
-  @PostMapping(path = AUTH_LOGIN_URL)
+  @PostMapping(path = AUTH_URL)
   public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest authRequest) {
     log.info("The user with {} email is trying to log in.", authRequest.getEmail());
     AuthResponse authResponse = authService.login(authRequest);

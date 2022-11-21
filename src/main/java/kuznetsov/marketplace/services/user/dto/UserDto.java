@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserDto {
 
+  private Long id;
+
   private String email;
 
   private Boolean isBanned;
