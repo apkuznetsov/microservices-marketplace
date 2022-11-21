@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.web.configuration;
+package kuznetsov.marketplace.services.jwt;
 
 import java.io.IOException;
 import java.util.Set;
@@ -6,7 +6,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import kuznetsov.marketplace.services.jwt.JwtService;
 import kuznetsov.marketplace.services.user.UserService;
 import kuznetsov.marketplace.services.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
