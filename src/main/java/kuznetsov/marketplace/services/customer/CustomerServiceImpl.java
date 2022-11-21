@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerServiceDefault implements CustomerService {
+public class CustomerServiceImpl implements CustomerService {
 
   private final CustomerMapper customerMapper;
 
