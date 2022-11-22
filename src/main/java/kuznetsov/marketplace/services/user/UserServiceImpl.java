@@ -6,7 +6,6 @@ import kuznetsov.marketplace.database.user.UserRepository;
 import kuznetsov.marketplace.domain.user.User;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import kuznetsov.marketplace.services.user.dto.UserDto;
-import kuznetsov.marketplace.services.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
