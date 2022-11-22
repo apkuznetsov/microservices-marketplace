@@ -28,4 +28,16 @@ public class UserServiceImpl implements UserService {
     return userMapper.toUserDto(user);
   }
 
+  @Override
+  public UserDto confirmUserEmail(String userEmail) {
+    User user = userRepo
+        .findByEmail(userEmail)
+        .orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
+
+    user.setEmailConfirmed(true);
+    User updatedUser = userRepo.saveAndFlush(user);
+
+    return userMapper.toUserDto(updatedUser);
+  }
+
 }

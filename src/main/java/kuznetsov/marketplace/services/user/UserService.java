@@ -6,4 +6,6 @@ public interface UserService {
 
   UserDto getUserByEmail(String userEmail);
 
+  UserDto confirmUserEmail(String userEmail);
+
 }
