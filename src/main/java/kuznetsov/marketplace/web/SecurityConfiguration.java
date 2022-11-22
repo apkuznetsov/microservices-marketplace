@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.web.configuration;
+package kuznetsov.marketplace.web;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
