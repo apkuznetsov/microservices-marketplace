@@ -20,6 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 
   private final UserRepository userRepo;
 
+  @Override
   @Transactional
   public CustomerDto registerCustomer(String email, String password) {
     Optional<User> optUser = userRepo.findByEmail(email);
