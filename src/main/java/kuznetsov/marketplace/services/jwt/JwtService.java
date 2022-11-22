@@ -2,7 +2,7 @@ package kuznetsov.marketplace.services.jwt;
 
 public interface JwtService {
 
-  String createAccessToken(String email, String role);
+  String generateAccessToken(String email, String role);
 
   boolean validateAccessToken(String token);
 

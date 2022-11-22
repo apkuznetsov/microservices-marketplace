@@ -38,7 +38,7 @@ public class AuthServiceImpl implements AuthService {
         .orElseThrow(() -> new ServiceException(AUTH_ERROR))
         .toString();
 
-    String accessToken = jwtService.createAccessToken(
+    String accessToken = jwtService.generateAccessToken(
         userEmail, userRole);
 
     return AuthResponse.builder()
