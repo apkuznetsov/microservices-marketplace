@@ -1,5 +1,6 @@
 package kuznetsov.marketplace.services.user;
 
+import static kuznetsov.marketplace.services.user.UserErrorCode.EMAIL_ALREADY_CONFIRMED;
 import static kuznetsov.marketplace.services.user.UserErrorCode.USER_NOT_FOUND;
 
 import kuznetsov.marketplace.database.user.UserRepository;
@@ -33,6 +34,10 @@ public class UserServiceImpl implements UserService {
     User user = userRepo
         .findByEmail(userEmail)
         .orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
+
+    if (user.isEmailConfirmed()) {
+      throw new ServiceException(EMAIL_ALREADY_CONFIRMED);
+    }
 
     user.setEmailConfirmed(true);
     User updatedUser = userRepo.saveAndFlush(user);
