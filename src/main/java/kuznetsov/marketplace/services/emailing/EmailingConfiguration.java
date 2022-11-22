@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.emailing.configuration;
+package kuznetsov.marketplace.services.emailing;
 
 import java.util.Properties;
 import org.springframework.beans.factory.annotation.Value;
