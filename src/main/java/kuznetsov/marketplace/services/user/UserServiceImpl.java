@@ -1,6 +1,6 @@
 package kuznetsov.marketplace.services.user;
 
-import static kuznetsov.marketplace.services.user.exception.UserErrorCode.USER_NOT_FOUND;
+import static kuznetsov.marketplace.services.user.UserErrorCode.USER_NOT_FOUND;
 
 import kuznetsov.marketplace.database.user.UserRepository;
 import kuznetsov.marketplace.domain.user.User;

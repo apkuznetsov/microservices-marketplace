@@ -1,6 +1,6 @@
 package kuznetsov.marketplace.services.auth;
 
-import static kuznetsov.marketplace.services.auth.exception.AuthErrorCode.AUTH_ERROR;
+import static kuznetsov.marketplace.services.auth.AuthErrorCode.AUTH_ERROR;
 
 import java.util.Optional;
 import kuznetsov.marketplace.services.auth.dto.AuthRequest;

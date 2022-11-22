@@ -1,6 +1,6 @@
 package kuznetsov.marketplace.services.customer;
 
-import static kuznetsov.marketplace.services.user.exception.UserErrorCode.USER_ALREADY_EXISTS;
+import static kuznetsov.marketplace.services.user.UserErrorCode.USER_ALREADY_EXISTS;
 
 import java.util.Optional;
 import kuznetsov.marketplace.database.user.UserRepository;
