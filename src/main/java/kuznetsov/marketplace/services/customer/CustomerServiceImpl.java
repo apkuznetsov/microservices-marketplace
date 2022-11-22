@@ -6,7 +6,6 @@ import java.util.Optional;
 import kuznetsov.marketplace.database.user.UserRepository;
 import kuznetsov.marketplace.domain.user.User;
 import kuznetsov.marketplace.services.customer.dto.CustomerDto;
-import kuznetsov.marketplace.services.customer.publisher.CustomerPublisher;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

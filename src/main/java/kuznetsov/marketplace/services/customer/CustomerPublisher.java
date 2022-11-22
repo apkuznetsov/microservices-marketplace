@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.customer.publisher;
+package kuznetsov.marketplace.services.customer;
 
 public interface CustomerPublisher {
 
