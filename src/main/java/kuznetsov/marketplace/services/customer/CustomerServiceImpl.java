@@ -31,7 +31,8 @@ public class CustomerServiceImpl implements CustomerService {
     User newUser = customerMapper.toCustomerUser(email, password);
     User savedUser = userRepo.saveAndFlush(newUser);
 
-    customerPublisher.publishCustomerRegistrationEvent(savedUser.getEmail());
+    customerPublisher.publishCustomerRegistrationEvent(
+        savedUser.getEmail(), savedUser.getRole().name());
     return customerMapper.toCustomerDto(savedUser);
   }
 

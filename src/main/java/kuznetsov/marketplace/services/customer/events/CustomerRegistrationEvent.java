@@ -1,12 +1,18 @@
 package kuznetsov.marketplace.services.customer.events;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CustomerRegistrationEvent {
 
-  private final String email;
+  private String email;
+
+  private String role;
 
 }
