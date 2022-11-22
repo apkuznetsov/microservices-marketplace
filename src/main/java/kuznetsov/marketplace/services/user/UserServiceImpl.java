@@ -18,10 +18,11 @@ public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepo;
 
+  @Override
   @Transactional(readOnly = true)
-  public UserDto getUserByEmail(String email) {
+  public UserDto getUserByEmail(String userEmail) {
     User user = userRepo
-        .findByEmail(email)
+        .findByEmail(userEmail)
         .orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
 
     return userMapper.toUserDto(user);
