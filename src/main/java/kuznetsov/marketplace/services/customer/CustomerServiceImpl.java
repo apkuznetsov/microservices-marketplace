@@ -7,6 +7,7 @@ import kuznetsov.marketplace.database.user.UserRepository;
 import kuznetsov.marketplace.domain.user.User;
 import kuznetsov.marketplace.services.customer.dto.CustomerDto;
 import kuznetsov.marketplace.services.customer.mapper.CustomerMapper;
+import kuznetsov.marketplace.services.customer.publisher.CustomerPublisher;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
+  private final CustomerPublisher customerPublisher;
   private final CustomerMapper customerMapper;
 
   private final UserRepository userRepo;
@@ -30,6 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
     User newUser = customerMapper.toCustomerUser(email, password);
     User savedUser = userRepo.saveAndFlush(newUser);
 
+    customerPublisher.publishCustomerRegistrationEvent(savedUser.getEmail());
     return customerMapper.toCustomerDto(savedUser);
   }
 
