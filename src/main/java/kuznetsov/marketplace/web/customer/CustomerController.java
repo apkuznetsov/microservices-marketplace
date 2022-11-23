@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class CustomersController {
+public class CustomerController {
 
   public final String CUSTOMERS_URL = "/api/v1/customers";
 
