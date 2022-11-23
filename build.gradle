@@ -12,6 +12,10 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set("springdocopenapiVersion", "1.6.13")
+}
+
 dependencies {
     implementation "io.jsonwebtoken:jjwt:0.9.1"
 
@@ -19,6 +23,10 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-mail"
+
+    implementation "org.springdoc:springdoc-openapi-common:${springdocopenapiVersion}"
+    implementation "org.springdoc:springdoc-openapi-ui:${springdocopenapiVersion}"
+    implementation "org.springdoc:springdoc-openapi-security:${springdocopenapiVersion}"
 
     compileOnly "org.projectlombok:lombok"
 
