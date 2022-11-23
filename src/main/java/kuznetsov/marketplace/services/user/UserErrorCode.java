@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.user.exception;
+package kuznetsov.marketplace.services.user;
 
 import kuznetsov.marketplace.services.exception.ServiceErrorCode;
 import lombok.Getter;
@@ -17,6 +17,11 @@ public enum UserErrorCode implements ServiceErrorCode {
   USER_ALREADY_EXISTS(
       "User Already Exists",
       "The specified user already exists in the system.",
+      HttpStatus.BAD_REQUEST),
+
+  EMAIL_ALREADY_CONFIRMED(
+      "Email Already Confirmed",
+      "The email address has already been confirmed.",
       HttpStatus.BAD_REQUEST);
 
   private final String name;

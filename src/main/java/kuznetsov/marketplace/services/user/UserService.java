@@ -4,6 +4,8 @@ import kuznetsov.marketplace.services.user.dto.UserDto;
 
 public interface UserService {
 
-  UserDto getUserByEmail(String email);
+  UserDto getUserByEmail(String userEmail);
+
+  UserDto confirmUserEmail(String userEmail);
 
 }

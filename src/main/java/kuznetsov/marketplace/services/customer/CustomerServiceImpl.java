@@ -1,13 +1,11 @@
 package kuznetsov.marketplace.services.customer;
 
-import static kuznetsov.marketplace.services.user.exception.UserErrorCode.USER_ALREADY_EXISTS;
+import static kuznetsov.marketplace.services.user.UserErrorCode.USER_ALREADY_EXISTS;
 
 import java.util.Optional;
 import kuznetsov.marketplace.database.user.UserRepository;
 import kuznetsov.marketplace.domain.user.User;
 import kuznetsov.marketplace.services.customer.dto.CustomerDto;
-import kuznetsov.marketplace.services.customer.mapper.CustomerMapper;
-import kuznetsov.marketplace.services.customer.publisher.CustomerPublisher;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 
   private final UserRepository userRepo;
 
+  @Override
   @Transactional
   public CustomerDto registerCustomer(String email, String password) {
     Optional<User> optUser = userRepo.findByEmail(email);
@@ -32,7 +31,8 @@ public class CustomerServiceImpl implements CustomerService {
     User newUser = customerMapper.toCustomerUser(email, password);
     User savedUser = userRepo.saveAndFlush(newUser);
 
-    customerPublisher.publishCustomerRegistrationEvent(savedUser.getEmail());
+    customerPublisher.publishCustomerRegistrationEvent(
+        savedUser.getEmail(), savedUser.getRole().name());
     return customerMapper.toCustomerDto(savedUser);
   }
 

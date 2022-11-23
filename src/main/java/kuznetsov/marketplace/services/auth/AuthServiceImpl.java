@@ -1,6 +1,6 @@
 package kuznetsov.marketplace.services.auth;
 
-import static kuznetsov.marketplace.services.auth.exception.AuthErrorCode.AUTH_ERROR;
+import static kuznetsov.marketplace.services.auth.AuthErrorCode.AUTH_ERROR;
 
 import java.util.Optional;
 import kuznetsov.marketplace.services.auth.dto.AuthRequest;
@@ -38,7 +38,7 @@ public class AuthServiceImpl implements AuthService {
         .orElseThrow(() -> new ServiceException(AUTH_ERROR))
         .toString();
 
-    String accessToken = jwtService.createAccessToken(
+    String accessToken = jwtService.generateAccessToken(
         userEmail, userRole);
 
     return AuthResponse.builder()

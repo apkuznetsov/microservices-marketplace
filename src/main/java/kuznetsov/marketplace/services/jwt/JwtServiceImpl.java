@@ -36,7 +36,7 @@ public class JwtServiceImpl implements JwtService {
     this.expirationAccessTime = expirationAccessTime;
   }
 
-  public String createAccessToken(String email, String role) {
+  public String generateAccessToken(String email, String role) {
     Claims claims = Jwts.claims();
     claims.setSubject(email);
     claims.put("role", role);

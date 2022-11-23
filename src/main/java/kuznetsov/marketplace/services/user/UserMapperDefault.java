@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.user.mapper;
+package kuznetsov.marketplace.services.user;
 
 import org.springframework.stereotype.Component;
 

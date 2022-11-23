@@ -23,6 +23,9 @@ auth:
   jwt-access-secret: "myAccessSecret"
   jwt-access-expiration-time: 24h
 
+activation:
+  url: ${ACTIVATION_URL:http://localhost:8080/api/v1/activation}
+
 emailing:
   host: ${EMAILING_HOST:smtp.yandex.ru}
   username: ${EMAILING_USERNAME}

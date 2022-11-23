@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.customer.events;
+package kuznetsov.marketplace.services.activation.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CustomerRegistrationEvent {
+public class ActivationRequest {
 
   private String email;
 

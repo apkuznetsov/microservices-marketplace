@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.customer.publisher;
+package kuznetsov.marketplace.services.customer;
 
 import kuznetsov.marketplace.services.customer.events.CustomerRegistrationEvent;
 import lombok.RequiredArgsConstructor;
@@ -11,8 +11,8 @@ public class CustomerPublisherImpl implements CustomerPublisher {
 
   private final ApplicationEventPublisher publisher;
 
-  public void publishCustomerRegistrationEvent(String customerEmail) {
-    publisher.publishEvent(new CustomerRegistrationEvent(customerEmail));
+  public void publishCustomerRegistrationEvent(String customerEmail, String customerRole) {
+    publisher.publishEvent(new CustomerRegistrationEvent(customerEmail, customerRole));
   }
 
 }

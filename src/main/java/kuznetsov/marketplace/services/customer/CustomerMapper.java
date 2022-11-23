@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.customer.mapper;
+package kuznetsov.marketplace.services.customer;
 
 import kuznetsov.marketplace.domain.user.User;
 import kuznetsov.marketplace.domain.user.UserRole;
