@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,9 +35,18 @@ public class ProductCategoryController {
     return ResponseEntity.created(addedCategoryUri).body(addedCategory);
   }
 
+  @PutMapping(path = CATEGORY_URL + "/{id}")
+  public ResponseEntity<ProductCategoryDto> updateCategory(
+      @PathVariable long id, @RequestBody ProductCategoryDto categoryDto) {
+
+    log.info("Update category {} id by new values {}", id, categoryDto.getName());
+    ProductCategoryDto updatedCategory = categoryService.updateCategory(id, categoryDto);
+
+    return ResponseEntity.ok(updatedCategory);
+  }
+
   @GetMapping(path = CATEGORY_URL + "/{id}")
   public ResponseEntity<ProductCategoryDto> getCategoryById(@RequestParam long id) {
-
     log.info("Someone tries to get category with {} id.", id);
     ProductCategoryDto category = categoryService.getCategoryById(id);
 

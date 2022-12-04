@@ -34,6 +34,19 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
   }
 
   @Override
+  @Transactional
+  public ProductCategoryDto updateCategory(long categoryId, ProductCategoryDto categoryDto) {
+    ProductCategory category = categoryRepo.findById(categoryId)
+        .orElseThrow(() -> new ServiceException(PRODUCT_CATEGORY_NOT_FOUND));
+
+    ProductCategory newCategory = categoryMapper.toProductCategory(categoryDto);
+    newCategory.setId(category.getId());
+    ProductCategory updatedCategory = categoryRepo.saveAndFlush(newCategory);
+
+    return categoryMapper.toProductCategoryDto(updatedCategory);
+  }
+
+  @Override
   public ProductCategoryDto getCategoryById(long categoryId) {
     ProductCategory category = categoryRepo.findById(categoryId)
         .orElseThrow(() -> new ServiceException(PRODUCT_CATEGORY_NOT_FOUND));
