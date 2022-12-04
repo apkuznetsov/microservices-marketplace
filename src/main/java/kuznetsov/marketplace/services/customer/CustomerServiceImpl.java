@@ -15,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
-  private final CustomerPublisher customerPublisher;
   private final CustomerMapper customerMapper;
+  private final CustomerPublisher customerPublisher;
 
   private final UserRepository userRepo;
 
