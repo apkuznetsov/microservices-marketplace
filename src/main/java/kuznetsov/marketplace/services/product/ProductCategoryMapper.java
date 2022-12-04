@@ -9,6 +9,13 @@ import org.springframework.data.domain.Page;
 
 public interface ProductCategoryMapper {
 
+  default ProductCategory toProductCategory(ProductCategoryDto categoryDto) {
+    return ProductCategory.builder()
+        .name(categoryDto.getName())
+        .coverUrl(categoryDto.getCoverUrl())
+        .build();
+  }
+
   default ProductCategoryDto toProductCategoryDto(ProductCategory category) {
     return ProductCategoryDto.builder()
         .id(category.getId())

@@ -5,6 +5,8 @@ import kuznetsov.marketplace.services.product.dto.ProductCategoryDtoPage;
 
 public interface ProductCategoryService {
 
+  ProductCategoryDto addCategory(ProductCategoryDto category);
+
   ProductCategoryDto getCategoryById(long categoryId);
 
   ProductCategoryDtoPage getPagedCategories(int pageNum);
