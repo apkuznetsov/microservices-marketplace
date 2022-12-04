@@ -1,6 +1,7 @@
 package kuznetsov.marketplace.web.product;
 
 import kuznetsov.marketplace.services.product.ProductCategoryService;
+import kuznetsov.marketplace.services.product.dto.ProductCategoryDto;
 import kuznetsov.marketplace.services.product.dto.ProductCategoryDtoPage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,15 @@ public class ProductCategoryController {
   public final String CATEGORY_URL = "/api/categories";
 
   private final ProductCategoryService categoryService;
+
+  @GetMapping(path = CATEGORY_URL + "/{id}")
+  public ResponseEntity<ProductCategoryDto> getCategoryById(@RequestParam long id) {
+
+    log.info("Someone tries to get category with {} id.", id);
+    ProductCategoryDto category = categoryService.getCategoryById(id);
+
+    return ResponseEntity.ok(category);
+  }
 
   @GetMapping(path = CATEGORY_URL)
   public ResponseEntity<ProductCategoryDtoPage> getPagedCategories(
