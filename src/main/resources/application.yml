@@ -32,3 +32,6 @@ emailing:
   password: ${EMAILING_PASSWORD}
   port: ${EMAILING_PORT:465}
   protocol: ${EMAILING_PROTOCOL:smtps}
+
+product:
+  page-size: 10
