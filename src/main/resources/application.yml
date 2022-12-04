@@ -34,4 +34,5 @@ emailing:
   protocol: ${EMAILING_PROTOCOL:smtps}
 
 product:
-  page-size: 10
+  category:
+    page-size: 10

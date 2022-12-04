@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProductCategoryServiceImpl implements ProductCategoryService {
 
-  private final ProductProperties productProps;
+  private final ProductCategoryProperties categoryProps;
   private final ProductCategoryMapper categoryMapper;
 
   private final ProductCategoryRepository categoryRepo;
@@ -38,7 +38,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
       throw new ServiceException(NOT_POSITIVE_PAGE_NUMBER);
     }
 
-    Pageable page = PageRequest.of(pageNum, productProps.getPageSize());
+    Pageable page = PageRequest.of(pageNum, categoryProps.getPageSize());
     Page<ProductCategory> pagedCategories = categoryRepo.findAll(page);
 
     return categoryMapper.toProductCategoryDtoPage(pagedCategories);

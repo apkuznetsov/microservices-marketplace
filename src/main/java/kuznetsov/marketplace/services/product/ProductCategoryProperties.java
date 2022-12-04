@@ -5,9 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "product")
+@ConfigurationProperties(prefix = "product.category")
 @Data
-public class ProductProperties {
+public class ProductCategoryProperties {
 
   private Integer pageSize;
 
