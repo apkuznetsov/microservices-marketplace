@@ -1,8 +1,8 @@
-package kuznetsov.marketplace.services.customer;
+package kuznetsov.marketplace.services.user;
 
 import kuznetsov.marketplace.domain.user.User;
 import kuznetsov.marketplace.domain.user.UserRole;
-import kuznetsov.marketplace.services.customer.dto.CustomerDto;
+import kuznetsov.marketplace.services.user.dto.CustomerDto;
 
 public interface CustomerMapper {
 

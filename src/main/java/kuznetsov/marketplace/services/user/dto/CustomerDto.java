@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.customer.dto;
+package kuznetsov.marketplace.services.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

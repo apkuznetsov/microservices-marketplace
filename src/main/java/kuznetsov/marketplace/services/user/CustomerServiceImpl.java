@@ -1,12 +1,12 @@
-package kuznetsov.marketplace.services.customer;
+package kuznetsov.marketplace.services.user;
 
 import static kuznetsov.marketplace.services.user.UserErrorCode.USER_ALREADY_EXISTS;
 
 import java.util.Optional;
 import kuznetsov.marketplace.database.user.UserRepository;
 import kuznetsov.marketplace.domain.user.User;
-import kuznetsov.marketplace.services.customer.dto.CustomerDto;
 import kuznetsov.marketplace.services.exception.ServiceException;
+import kuznetsov.marketplace.services.user.dto.CustomerDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

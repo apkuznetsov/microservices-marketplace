@@ -1,6 +1,6 @@
-package kuznetsov.marketplace.services.customer;
+package kuznetsov.marketplace.services.user;
 
-import kuznetsov.marketplace.services.customer.events.CustomerRegistrationEvent;
+import kuznetsov.marketplace.services.user.events.CustomerRegistrationEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;

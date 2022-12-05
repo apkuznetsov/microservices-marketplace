@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.customer.events;
+package kuznetsov.marketplace.services.user.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

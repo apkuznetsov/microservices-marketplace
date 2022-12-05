@@ -1,9 +1,9 @@
 package kuznetsov.marketplace.web.customer;
 
 import java.net.URI;
-import kuznetsov.marketplace.services.customer.CustomerService;
-import kuznetsov.marketplace.services.customer.dto.CustomerDto;
-import kuznetsov.marketplace.services.customer.dto.CustomerRequest;
+import kuznetsov.marketplace.services.user.CustomerService;
+import kuznetsov.marketplace.services.user.dto.CustomerDto;
+import kuznetsov.marketplace.services.user.dto.CustomerRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
