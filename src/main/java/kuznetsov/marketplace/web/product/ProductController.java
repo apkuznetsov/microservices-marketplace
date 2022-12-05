@@ -38,4 +38,12 @@ public class ProductController {
 
   }
 
+  @GetMapping(path = PRODUCT_URL + "/{id}")
+  public ResponseEntity<ProductDto> getProductById(@RequestParam long id) {
+    log.info("Someone tries to get product with {} id.", id);
+    ProductDto product = productService.getProductById(id);
+
+    return ResponseEntity.ok(product);
+  }
+
 }

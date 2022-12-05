@@ -6,4 +6,6 @@ public interface ProductService {
 
   ProductDto addSellerProduct(String sellerEmail, ProductDto productDto);
 
+  ProductDto getProductById(long productId);
+
 }

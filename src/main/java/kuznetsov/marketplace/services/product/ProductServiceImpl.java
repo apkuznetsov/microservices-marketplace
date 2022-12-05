@@ -1,6 +1,7 @@
 package kuznetsov.marketplace.services.product;
 
 import static kuznetsov.marketplace.services.product.ProductCategoryErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
+import static kuznetsov.marketplace.services.product.ProductErrorCode.PRODUCT_NOT_FOUND;
 import static kuznetsov.marketplace.services.user.SellerErrorCode.SELLER_NOT_FOUND;
 
 import java.util.List;
@@ -51,6 +52,14 @@ public class ProductServiceImpl implements ProductService {
     savedProduct.setImageUrls(savedImageUrls);
 
     return productMapper.toProductDto(savedProduct, category, seller);
+  }
+
+  @Override
+  public ProductDto getProductById(long productId) {
+    Product product = productRepo.findById(productId)
+        .orElseThrow(() -> new ServiceException(PRODUCT_NOT_FOUND));
+
+    return productMapper.toProductDto(product, product.getCategory(), product.getSeller());
   }
 
   private List<ProductImageUrl> saveAllAndFlushProductImageUrls(
