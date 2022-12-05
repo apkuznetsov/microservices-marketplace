@@ -1,6 +1,6 @@
 package kuznetsov.marketplace.services.user;
 
-import static kuznetsov.marketplace.services.user.UserErrorCode.EMAIL_ALREADY_CONFIRMED;
+import static kuznetsov.marketplace.services.user.UserErrorCode.USER_EMAIL_ALREADY_CONFIRMED;
 import static kuznetsov.marketplace.services.user.UserErrorCode.USER_NOT_FOUND;
 
 import kuznetsov.marketplace.database.user.UserRepository;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         .orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
 
     if (user.isEmailConfirmed()) {
-      throw new ServiceException(EMAIL_ALREADY_CONFIRMED);
+      throw new ServiceException(USER_EMAIL_ALREADY_CONFIRMED);
     }
 
     user.setEmailConfirmed(true);
