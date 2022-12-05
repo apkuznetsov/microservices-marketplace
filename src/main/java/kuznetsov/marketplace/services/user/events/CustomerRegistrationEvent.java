@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.customer.dto;
+package kuznetsov.marketplace.services.user.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,14 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CustomerDto {
-
-  private Long id;
+public class CustomerRegistrationEvent {
 
   private String email;
 
-  private Boolean isBanned;
-
-  private Boolean isEmailConfirmed;
+  private String role;
 
 }

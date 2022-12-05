@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.customer.events;
+package kuznetsov.marketplace.services.user.events;
 
 import kuznetsov.marketplace.services.activation.ActivationService;
 import kuznetsov.marketplace.services.activation.dto.ActivationRequest;
