@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import kuznetsov.marketplace.domain.product.Product;
-import kuznetsov.marketplace.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,13 +41,13 @@ public class Seller {
 
   @Column(name = "public_email", nullable = false, length = 255)
   private String publicEmail;
+  
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "s_user_id", nullable = false)
+  private User user;
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "p_seller_id")
   private List<Product> products;
-
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "s_user_id", nullable = false)
-  private User user;
 
 }
