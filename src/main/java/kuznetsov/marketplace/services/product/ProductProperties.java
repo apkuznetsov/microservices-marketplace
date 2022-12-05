@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 public class ProductProperties {
 
   private Integer minPrice;
-
   private Integer maxPrice;
 
 }
