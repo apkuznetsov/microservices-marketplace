@@ -19,6 +19,11 @@ public enum UserErrorCode implements ServiceErrorCode {
       "The specified user already exists in the system.",
       HttpStatus.BAD_REQUEST),
 
+  USER_EMAIL_NOT_CONFIRMED(
+      "Email Not Confirmed",
+      "The email address has not been confirmed.",
+      HttpStatus.BAD_REQUEST),
+
   USER_EMAIL_ALREADY_CONFIRMED(
       "Email Already Confirmed",
       "The email address has already been confirmed.",
