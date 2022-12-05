@@ -1,7 +1,7 @@
-package kuznetsov.marketplace.database.seller;
+package kuznetsov.marketplace.database.user;
 
 import java.util.Optional;
-import kuznetsov.marketplace.domain.seller.Seller;
+import kuznetsov.marketplace.domain.user.Seller;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

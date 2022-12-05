@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import kuznetsov.marketplace.domain.seller.Seller;
+import kuznetsov.marketplace.domain.user.Seller;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

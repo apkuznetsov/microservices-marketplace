@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.domain.seller;
+package kuznetsov.marketplace.domain.user;
 
 import java.util.List;
 import javax.persistence.Column;
