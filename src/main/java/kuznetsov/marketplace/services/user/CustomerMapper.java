@@ -1,5 +1,6 @@
 package kuznetsov.marketplace.services.user;
 
+import kuznetsov.marketplace.domain.user.Customer;
 import kuznetsov.marketplace.domain.user.User;
 import kuznetsov.marketplace.domain.user.UserRole;
 import kuznetsov.marketplace.services.user.dto.CustomerDto;
@@ -13,6 +14,13 @@ public interface CustomerMapper {
         .role(UserRole.CUSTOMER)
         .isEmailConfirmed(false)
         .isBanned(false)
+        .build();
+  }
+
+  default Customer toCustomer(User user) {
+    return Customer.builder()
+        .publicEmail(user.getEmail())
+        .user(user)
         .build();
   }
 
