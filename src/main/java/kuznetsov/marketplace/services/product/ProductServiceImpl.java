@@ -1,5 +1,6 @@
 package kuznetsov.marketplace.services.product;
 
+import static kuznetsov.marketplace.services.pagination.PageErrorCode.NOT_POSITIVE_PAGE_NUMBER;
 import static kuznetsov.marketplace.services.product.ProductCategoryErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
 import static kuznetsov.marketplace.services.product.ProductErrorCode.PRODUCT_NOT_FOUND;
 import static kuznetsov.marketplace.services.user.SellerErrorCode.SELLER_NOT_FOUND;
@@ -17,7 +18,11 @@ import kuznetsov.marketplace.models.product.ProductImageUrl;
 import kuznetsov.marketplace.models.user.Seller;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import kuznetsov.marketplace.services.product.dto.ProductDto;
+import kuznetsov.marketplace.services.product.dto.ProductDtoPage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -60,6 +65,22 @@ public class ProductServiceImpl implements ProductService {
         .orElseThrow(() -> new ServiceException(PRODUCT_NOT_FOUND));
 
     return productMapper.toProductDto(product, product.getCategory(), product.getSeller());
+  }
+
+  @Override
+  public ProductDtoPage getPagedSellerProducts(String sellerEmail, int pageNum) {
+    --pageNum;
+    if (pageNum < 0) {
+      throw new ServiceException(NOT_POSITIVE_PAGE_NUMBER);
+    }
+
+    Seller seller = sellerRepo.findByUserEmail(sellerEmail)
+        .orElseThrow(() -> new ServiceException(SELLER_NOT_FOUND));
+    Pageable page = PageRequest.of(pageNum, productProps.getPageSize());
+    Page<Product> pagedProducts = productRepo
+        .findAllBySellerAndPreorderInfo_IdNotNull(seller, page);
+
+    return productMapper.toProductDtoPage(pagedProducts);
   }
 
   private List<ProductImageUrl> saveAllAndFlushProductImageUrls(
