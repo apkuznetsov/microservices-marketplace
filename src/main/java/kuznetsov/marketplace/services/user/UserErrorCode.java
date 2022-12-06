@@ -27,7 +27,12 @@ public enum UserErrorCode implements ServiceErrorCode {
   USER_EMAIL_ALREADY_CONFIRMED(
       "Email Already Confirmed",
       "The email address has already been confirmed.",
-      HttpStatus.BAD_REQUEST);
+      HttpStatus.BAD_REQUEST),
+
+  USER_HAS_NO_PERMISSION(
+      "User Has No Permission",
+      "Current user has no permissions to do the operation.",
+      HttpStatus.FORBIDDEN);
 
   private final String name;
   private final String message;
