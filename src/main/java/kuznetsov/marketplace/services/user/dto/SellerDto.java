@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.product.dto;
+package kuznetsov.marketplace.services.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductSellerDto {
+public class SellerDto {
 
   private String name;
 

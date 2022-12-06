@@ -5,7 +5,7 @@ import kuznetsov.marketplace.domain.product.ProductCategory;
 import kuznetsov.marketplace.domain.user.Seller;
 import kuznetsov.marketplace.services.product.dto.ProductCategoryDto;
 import kuznetsov.marketplace.services.product.dto.ProductDto;
-import kuznetsov.marketplace.services.product.dto.ProductSellerDto;
+import kuznetsov.marketplace.services.user.dto.SellerDto;
 
 public interface ProductMapper {
 
@@ -32,7 +32,7 @@ public interface ProductMapper {
 
   default ProductDto toProductDto(Product product, ProductCategory category, Seller seller) {
     ProductCategoryDto categoryDto = this.toProductCategoryDto(category);
-    ProductSellerDto sellerDto = this.toProductSellerDto(seller);
+    SellerDto sellerDto = this.toProductSellerDto(seller);
 
     return ProductDto.builder()
         .id(product.getId())
@@ -66,8 +66,8 @@ public interface ProductMapper {
         .build();
   }
 
-  private ProductSellerDto toProductSellerDto(Seller seller) {
-    return ProductSellerDto.builder()
+  private SellerDto toProductSellerDto(Seller seller) {
+    return SellerDto.builder()
         .name(seller.getName())
         .address(seller.getAddress())
         .email(seller.getPublicEmail())
