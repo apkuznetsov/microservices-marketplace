@@ -3,8 +3,10 @@ package kuznetsov.marketplace.services.user;
 import static kuznetsov.marketplace.services.user.UserErrorCode.USER_ALREADY_EXISTS;
 
 import java.util.Optional;
+import kuznetsov.marketplace.database.user.CustomerRepository;
 import kuznetsov.marketplace.database.user.UserRepository;
-import kuznetsov.marketplace.domain.user.User;
+import kuznetsov.marketplace.models.user.Customer;
+import kuznetsov.marketplace.models.user.User;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import kuznetsov.marketplace.services.user.dto.CustomerDto;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
   private final CustomerMapper customerMapper;
   private final CustomerPublisher customerPublisher;
 
+  private final CustomerRepository customerRepo;
   private final UserRepository userRepo;
 
   @Override
@@ -30,6 +33,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     User newUser = customerMapper.toCustomerUser(email, password);
     User savedUser = userRepo.saveAndFlush(newUser);
+
+    Customer customer = customerMapper.toCustomer(savedUser);
+    customerRepo.saveAndFlush(customer);
 
     customerPublisher.publishCustomerRegistrationEvent(
         savedUser.getEmail(), savedUser.getRole().name());

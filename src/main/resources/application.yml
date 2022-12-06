@@ -38,3 +38,12 @@ product:
   max-price: 1000000
   category:
     page-size: 10
+
+preorder:
+  page-size: 10
+  min-price: 0
+  max-price: 1000000
+  min-preorder-duration-days: 7
+  max-preorder-duration-days: 14
+  min-preorder-expected-quantity: 1
+  max-preorder-expected-quantity: 1000

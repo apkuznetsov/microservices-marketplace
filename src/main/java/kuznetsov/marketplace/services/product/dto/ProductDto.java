@@ -30,6 +30,8 @@ public class ProductDto {
 
   private String sellerAddress;
 
+  private String sellerCountry;
+
   private String sellerEmail;
 
   private List<String> imageUrls;

@@ -1,24 +1,20 @@
 package kuznetsov.marketplace.services.product;
 
-import kuznetsov.marketplace.domain.product.Product;
-import kuznetsov.marketplace.domain.product.ProductCategory;
-import kuznetsov.marketplace.domain.user.Seller;
+import kuznetsov.marketplace.models.product.Product;
+import kuznetsov.marketplace.models.product.ProductCategory;
+import kuznetsov.marketplace.models.user.Seller;
 import kuznetsov.marketplace.services.product.dto.ProductCategoryDto;
 import kuznetsov.marketplace.services.product.dto.ProductDto;
-import kuznetsov.marketplace.services.product.dto.ProductSellerDto;
+import kuznetsov.marketplace.services.user.dto.SellerDto;
 
 public interface ProductMapper {
 
   default Product toProduct(ProductDto productDto) {
     return Product.builder()
-        .id(null)
         .title(productDto.getTitle())
         .description(productDto.getDescription())
         .techDescription(productDto.getTechDescription())
-        .category(null)
         .centPrice((long) (productDto.getPrice() * 100.0))
-        .seller(null)
-        .imageUrls(null)
         .build();
   }
 
@@ -32,7 +28,7 @@ public interface ProductMapper {
 
   default ProductDto toProductDto(Product product, ProductCategory category, Seller seller) {
     ProductCategoryDto categoryDto = this.toProductCategoryDto(category);
-    ProductSellerDto sellerDto = this.toProductSellerDto(seller);
+    SellerDto sellerDto = this.toProductSellerDto(seller);
 
     return ProductDto.builder()
         .id(product.getId())
@@ -44,6 +40,7 @@ public interface ProductMapper {
         .price(product.getCentPrice() / 100.0)
         .sellerName(sellerDto.getName())
         .sellerAddress(sellerDto.getAddress())
+        .sellerCountry(sellerDto.getCountry())
         .sellerEmail(sellerDto.getEmail())
         .imageUrls(null)
         .build();
@@ -66,10 +63,11 @@ public interface ProductMapper {
         .build();
   }
 
-  private ProductSellerDto toProductSellerDto(Seller seller) {
-    return ProductSellerDto.builder()
+  private SellerDto toProductSellerDto(Seller seller) {
+    return SellerDto.builder()
         .name(seller.getName())
         .address(seller.getAddress())
+        .country(seller.getCountry())
         .email(seller.getPublicEmail())
         .build();
   }

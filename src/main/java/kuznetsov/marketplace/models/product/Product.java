@@ -1,6 +1,7 @@
-package kuznetsov.marketplace.domain.product;
+package kuznetsov.marketplace.models.product;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import kuznetsov.marketplace.domain.user.Seller;
+import kuznetsov.marketplace.models.preorder.PreorderInfo;
+import kuznetsov.marketplace.models.user.Seller;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -49,6 +52,10 @@ public class Product {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "p_seller_id", nullable = false)
   private Seller seller;
+
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinColumn(name = "p_preorder_id", referencedColumnName = "id")
+  private PreorderInfo preorderInfo;
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "piu_product_id")

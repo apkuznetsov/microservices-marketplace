@@ -4,7 +4,7 @@ import static kuznetsov.marketplace.services.pagination.PageErrorCode.NOT_POSITI
 import static kuznetsov.marketplace.services.product.ProductCategoryErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
 
 import kuznetsov.marketplace.database.product.ProductCategoryRepository;
-import kuznetsov.marketplace.domain.product.ProductCategory;
+import kuznetsov.marketplace.models.product.ProductCategory;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import kuznetsov.marketplace.services.product.dto.ProductCategoryDto;
 import kuznetsov.marketplace.services.product.dto.ProductCategoryDtoPage;

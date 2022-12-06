@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.product.dto;
+package kuznetsov.marketplace.services.preorder.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,12 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductSellerDto {
-
-  private String name;
-
-  private String address;
+public class CustomerParticipationEvent {
 
   private String email;
+
+  private String role;
 
 }

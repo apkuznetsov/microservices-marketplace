@@ -2,7 +2,7 @@ package kuznetsov.marketplace.services.product;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import kuznetsov.marketplace.domain.product.ProductCategory;
+import kuznetsov.marketplace.models.product.ProductCategory;
 import kuznetsov.marketplace.services.product.dto.ProductCategoryDto;
 import kuznetsov.marketplace.services.product.dto.ProductCategoryDtoPage;
 import org.springframework.data.domain.Page;
@@ -38,7 +38,7 @@ public interface ProductCategoryMapper {
         .totalCategoriesPages(categoryPage.getTotalPages())
         .categoriesMaxPageSize(categoryPage.getSize())
         .categoriesPageNumber(categoryPage.getNumber() + 1)
-        .content(categoryDtoList)
+        .categories(categoryDtoList)
         .build();
   }
 

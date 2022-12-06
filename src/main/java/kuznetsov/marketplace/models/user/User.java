@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.domain.user;
+package kuznetsov.marketplace.models.user;
 
 import java.util.Collection;
 import java.util.List;
