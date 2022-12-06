@@ -15,6 +15,8 @@ public class SellerDto {
 
   private String address;
 
+  private String country;
+
   private String email;
 
 }

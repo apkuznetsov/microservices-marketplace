@@ -11,14 +11,10 @@ public interface ProductMapper {
 
   default Product toProduct(ProductDto productDto) {
     return Product.builder()
-        .id(null)
         .title(productDto.getTitle())
         .description(productDto.getDescription())
         .techDescription(productDto.getTechDescription())
-        .category(null)
         .centPrice((long) (productDto.getPrice() * 100.0))
-        .seller(null)
-        .imageUrls(null)
         .build();
   }
 
@@ -44,6 +40,7 @@ public interface ProductMapper {
         .price(product.getCentPrice() / 100.0)
         .sellerName(sellerDto.getName())
         .sellerAddress(sellerDto.getAddress())
+        .sellerCountry(sellerDto.getCountry())
         .sellerEmail(sellerDto.getEmail())
         .imageUrls(null)
         .build();
@@ -70,6 +67,7 @@ public interface ProductMapper {
     return SellerDto.builder()
         .name(seller.getName())
         .address(seller.getAddress())
+        .country(seller.getCountry())
         .email(seller.getPublicEmail())
         .build();
   }
