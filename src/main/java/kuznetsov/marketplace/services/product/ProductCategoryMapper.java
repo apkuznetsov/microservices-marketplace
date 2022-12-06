@@ -38,7 +38,7 @@ public interface ProductCategoryMapper {
         .totalCategoriesPages(categoryPage.getTotalPages())
         .categoriesMaxPageSize(categoryPage.getSize())
         .categoriesPageNumber(categoryPage.getNumber() + 1)
-        .content(categoryDtoList)
+        .categories(categoryDtoList)
         .build();
   }
 

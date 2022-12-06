@@ -20,6 +20,6 @@ public class ProductCategoryDtoPage {
 
   private Integer categoriesPageNumber;
 
-  private List<ProductCategoryDto> content;
+  private List<ProductCategoryDto> categories;
 
 }
