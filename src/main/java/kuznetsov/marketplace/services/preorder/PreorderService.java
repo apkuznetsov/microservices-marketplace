@@ -3,7 +3,7 @@ package kuznetsov.marketplace.services.preorder;
 import kuznetsov.marketplace.services.preorder.dto.PreorderCreateDto;
 import kuznetsov.marketplace.services.preorder.dto.PreorderDto;
 import kuznetsov.marketplace.services.preorder.dto.PreorderDtoPage;
-import kuznetsov.marketplace.services.preorder.dto.PreorderParticipationsDtoPage;
+import kuznetsov.marketplace.services.preorder.dto.PreorderParticipantsDtoPage;
 
 public interface PreorderService {
 
@@ -17,7 +17,7 @@ public interface PreorderService {
 
   void participateCustomerInPreorderByPreorderId(String customerEmail, long preorderId);
 
-  PreorderParticipationsDtoPage getSellerPreorderParticipationsPageByPreorderId(
+  PreorderParticipantsDtoPage getSellerPreorderParticipationsPageByPreorderId(
       long preorderId, String currentSellerEmail, int pageNum);
 
 }
