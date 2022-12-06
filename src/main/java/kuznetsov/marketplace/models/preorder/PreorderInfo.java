@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.domain.preorder;
+package kuznetsov.marketplace.models.preorder;
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import kuznetsov.marketplace.domain.product.Product;
+import kuznetsov.marketplace.models.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

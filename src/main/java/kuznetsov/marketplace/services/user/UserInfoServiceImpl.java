@@ -1,7 +1,7 @@
 package kuznetsov.marketplace.services.user;
 
 import kuznetsov.marketplace.database.user.UserRepository;
-import kuznetsov.marketplace.domain.user.User;
+import kuznetsov.marketplace.models.user.User;
 import kuznetsov.marketplace.services.user.dto.UserInfoDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

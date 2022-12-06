@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.domain.preorder;
+package kuznetsov.marketplace.models.preorder;
 
 public enum PreorderParticipationStatus {
 

@@ -1,8 +1,8 @@
 package kuznetsov.marketplace.database.product;
 
-import kuznetsov.marketplace.domain.product.Product;
-import kuznetsov.marketplace.domain.user.Customer;
-import kuznetsov.marketplace.domain.user.Seller;
+import kuznetsov.marketplace.models.product.Product;
+import kuznetsov.marketplace.models.user.Customer;
+import kuznetsov.marketplace.models.user.Seller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

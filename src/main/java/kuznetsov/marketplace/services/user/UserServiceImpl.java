@@ -4,7 +4,7 @@ import static kuznetsov.marketplace.services.user.UserErrorCode.USER_EMAIL_ALREA
 import static kuznetsov.marketplace.services.user.UserErrorCode.USER_NOT_FOUND;
 
 import kuznetsov.marketplace.database.user.UserRepository;
-import kuznetsov.marketplace.domain.user.User;
+import kuznetsov.marketplace.models.user.User;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import kuznetsov.marketplace.services.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;

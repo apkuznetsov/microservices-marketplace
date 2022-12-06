@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.domain.preorder;
+package kuznetsov.marketplace.models.preorder;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.Column;
@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import kuznetsov.marketplace.domain.user.Customer;
+import kuznetsov.marketplace.models.user.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

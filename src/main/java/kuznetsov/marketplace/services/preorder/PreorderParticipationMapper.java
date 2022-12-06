@@ -2,10 +2,10 @@ package kuznetsov.marketplace.services.preorder;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import kuznetsov.marketplace.domain.preorder.PreorderInfo;
-import kuznetsov.marketplace.domain.preorder.PreorderParticipation;
-import kuznetsov.marketplace.domain.preorder.PreorderParticipationStatus;
-import kuznetsov.marketplace.domain.user.Customer;
+import kuznetsov.marketplace.models.preorder.PreorderInfo;
+import kuznetsov.marketplace.models.preorder.PreorderParticipation;
+import kuznetsov.marketplace.models.preorder.PreorderParticipationStatus;
+import kuznetsov.marketplace.models.user.Customer;
 import kuznetsov.marketplace.services.preorder.dto.PreorderParticipantDto;
 import kuznetsov.marketplace.services.preorder.dto.PreorderParticipantsDtoPage;
 import org.springframework.data.domain.Page;

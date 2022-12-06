@@ -5,8 +5,8 @@ import static kuznetsov.marketplace.services.user.UserErrorCode.USER_ALREADY_EXI
 import java.util.Optional;
 import kuznetsov.marketplace.database.user.CustomerRepository;
 import kuznetsov.marketplace.database.user.UserRepository;
-import kuznetsov.marketplace.domain.user.Customer;
-import kuznetsov.marketplace.domain.user.User;
+import kuznetsov.marketplace.models.user.Customer;
+import kuznetsov.marketplace.models.user.User;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import kuznetsov.marketplace.services.user.dto.CustomerDto;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,9 @@
 package kuznetsov.marketplace.database.preorder;
 
-import kuznetsov.marketplace.domain.preorder.PreorderInfo;
-import kuznetsov.marketplace.domain.preorder.PreorderParticipation;
-import kuznetsov.marketplace.domain.product.Product;
-import kuznetsov.marketplace.domain.user.Customer;
+import kuznetsov.marketplace.models.preorder.PreorderInfo;
+import kuznetsov.marketplace.models.preorder.PreorderParticipation;
+import kuznetsov.marketplace.models.product.Product;
+import kuznetsov.marketplace.models.user.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

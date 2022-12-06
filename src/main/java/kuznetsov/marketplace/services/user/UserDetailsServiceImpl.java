@@ -5,7 +5,7 @@ import static kuznetsov.marketplace.services.user.UserErrorCode.USER_NOT_FOUND;
 
 import java.util.Set;
 import kuznetsov.marketplace.database.user.UserRepository;
-import kuznetsov.marketplace.domain.user.User;
+import kuznetsov.marketplace.models.user.User;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

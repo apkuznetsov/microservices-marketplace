@@ -1,7 +1,7 @@
 package kuznetsov.marketplace.services.preorder.dto;
 
 import javax.annotation.PostConstruct;
-import kuznetsov.marketplace.domain.preorder.PreorderParticipationStatus;
+import kuznetsov.marketplace.models.preorder.PreorderParticipationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

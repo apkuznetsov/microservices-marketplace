@@ -4,12 +4,12 @@ import static kuznetsov.marketplace.services.preorder.PreorderErrorCode.PREORDER
 
 import java.util.List;
 import java.util.stream.Collectors;
-import kuznetsov.marketplace.domain.preorder.PreorderInfo;
-import kuznetsov.marketplace.domain.preorder.PreorderStatus;
-import kuznetsov.marketplace.domain.product.Product;
-import kuznetsov.marketplace.domain.product.ProductCategory;
-import kuznetsov.marketplace.domain.product.ProductImageUrl;
-import kuznetsov.marketplace.domain.user.Seller;
+import kuznetsov.marketplace.models.preorder.PreorderInfo;
+import kuznetsov.marketplace.models.preorder.PreorderStatus;
+import kuznetsov.marketplace.models.product.Product;
+import kuznetsov.marketplace.models.product.ProductCategory;
+import kuznetsov.marketplace.models.product.ProductImageUrl;
+import kuznetsov.marketplace.models.user.Seller;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import kuznetsov.marketplace.services.preorder.dto.PreorderDto;
 import kuznetsov.marketplace.services.preorder.dto.PreorderDtoPage;

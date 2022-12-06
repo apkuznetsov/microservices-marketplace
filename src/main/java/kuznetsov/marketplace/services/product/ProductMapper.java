@@ -1,8 +1,8 @@
 package kuznetsov.marketplace.services.product;
 
-import kuznetsov.marketplace.domain.product.Product;
-import kuznetsov.marketplace.domain.product.ProductCategory;
-import kuznetsov.marketplace.domain.user.Seller;
+import kuznetsov.marketplace.models.product.Product;
+import kuznetsov.marketplace.models.product.ProductCategory;
+import kuznetsov.marketplace.models.user.Seller;
 import kuznetsov.marketplace.services.product.dto.ProductCategoryDto;
 import kuznetsov.marketplace.services.product.dto.ProductDto;
 import kuznetsov.marketplace.services.user.dto.SellerDto;

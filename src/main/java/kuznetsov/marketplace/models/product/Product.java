@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.domain.product;
+package kuznetsov.marketplace.models.product;
 
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -13,8 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import kuznetsov.marketplace.domain.preorder.PreorderInfo;
-import kuznetsov.marketplace.domain.user.Seller;
+import kuznetsov.marketplace.models.preorder.PreorderInfo;
+import kuznetsov.marketplace.models.user.Seller;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

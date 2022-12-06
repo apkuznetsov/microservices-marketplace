@@ -2,8 +2,8 @@ package kuznetsov.marketplace.services.preorder.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import kuznetsov.marketplace.domain.preorder.PreorderParticipationStatus;
-import kuznetsov.marketplace.domain.preorder.PreorderStatus;
+import kuznetsov.marketplace.models.preorder.PreorderParticipationStatus;
+import kuznetsov.marketplace.models.preorder.PreorderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

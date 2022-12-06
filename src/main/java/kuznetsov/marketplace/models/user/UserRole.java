@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.domain.user;
+package kuznetsov.marketplace.models.user;
 
 import org.springframework.security.core.GrantedAuthority;
 
