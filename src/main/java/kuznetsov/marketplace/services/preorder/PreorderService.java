@@ -1,13 +1,12 @@
 package kuznetsov.marketplace.services.preorder;
 
-import kuznetsov.marketplace.services.preorder.dto.PreorderCreateDto;
 import kuznetsov.marketplace.services.preorder.dto.PreorderDto;
 import kuznetsov.marketplace.services.preorder.dto.PreorderDtoPage;
 import kuznetsov.marketplace.services.preorder.dto.PreorderParticipantsDtoPage;
 
 public interface PreorderService {
 
-  PreorderDto addSellerPreorder(String sellerEmail, PreorderCreateDto preorderDto);
+  PreorderDto addSellerPreorder(String sellerEmail, PreorderDto preorderDto);
 
   PreorderDto getPreorderByIdWithCurrentUserParticipationStatus(String userEmail, long preorderId);
 
@@ -18,6 +17,6 @@ public interface PreorderService {
   void participateCustomerInPreorderByPreorderId(String customerEmail, long preorderId);
 
   PreorderParticipantsDtoPage getSellerPreorderParticipationsPageByPreorderId(
-      long preorderId, String currentSellerEmail, int pageNum);
+      String currentSellerEmail, long preorderId, int pageNum);
 
 }
