@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class ProductCategoryController {
 
-  public final String CATEGORY_URL = "/api/categories";
+  public final String CATEGORY_URL = "/api/v1/categories";
 
   private final ProductCategoryService categoryService;
 
   @PostMapping(path = CATEGORY_URL)
   @ModeratorPermission
   public ResponseEntity<ProductCategoryDto> addCategory(@RequestBody ProductCategoryDto category) {
-    log.info("Add new category {}", category.getName());
+    log.info("Moderator is trying  to add new category {}", category.getName());
     ProductCategoryDto addedCategory = categoryService.addCategory(category);
 
     URI addedCategoryUri = URI.create(CATEGORY_URL + "/" + addedCategory.getId());
@@ -36,10 +36,12 @@ public class ProductCategoryController {
   }
 
   @PutMapping(path = CATEGORY_URL + "/{id}")
-  public ResponseEntity<ProductCategoryDto> updateCategory(
+  @ModeratorPermission
+  public ResponseEntity<ProductCategoryDto> updateCategoryById(
       @PathVariable long id, @RequestBody ProductCategoryDto categoryDto) {
 
-    log.info("Update category {} id by new values {}", id, categoryDto.getName());
+    log.info("Moderator is trying to update category {} id by new values {}",
+        id, categoryDto.getName());
     ProductCategoryDto updatedCategory = categoryService.updateCategory(id, categoryDto);
 
     return ResponseEntity.ok(updatedCategory);
@@ -47,7 +49,7 @@ public class ProductCategoryController {
 
   @GetMapping(path = CATEGORY_URL + "/{id}")
   public ResponseEntity<ProductCategoryDto> getCategoryById(@RequestParam long id) {
-    log.info("Someone tries to get category with {} id.", id);
+    log.info("Someone is trying to get category with {} id.", id);
     ProductCategoryDto category = categoryService.getCategoryById(id);
 
     return ResponseEntity.ok(category);
