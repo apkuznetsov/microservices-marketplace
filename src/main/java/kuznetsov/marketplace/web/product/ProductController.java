@@ -4,11 +4,13 @@ import java.net.URI;
 import java.security.Principal;
 import kuznetsov.marketplace.services.product.ProductService;
 import kuznetsov.marketplace.services.product.dto.ProductDto;
+import kuznetsov.marketplace.services.product.dto.ProductDtoPage;
 import kuznetsov.marketplace.services.security.SellerPermission;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 
   public final String PRODUCT_URL = "/api/products";
+  public final String PRODUCT_BY_CATEGORY = "/api/categories";
 
   private final ProductService productService;
 
@@ -44,6 +47,17 @@ public class ProductController {
     ProductDto product = productService.getProductById(id);
 
     return ResponseEntity.ok(product);
+  }
+
+  @GetMapping(path = PRODUCT_BY_CATEGORY + "/{id}" + "/products")
+  public ResponseEntity<ProductDtoPage> getPagedProductsByCategoryId(
+      @PathVariable long id,
+      @RequestParam(name = "page", required = false, defaultValue = "1") int pageNum) {
+
+    log.info("Someone tries to get paged products  {} by category {} id.", pageNum, id);
+    ProductDtoPage pagedProducts = productService.getPagedProductsByCategoryId(id, pageNum);
+
+    return ResponseEntity.ok(pagedProducts);
   }
 
 }
