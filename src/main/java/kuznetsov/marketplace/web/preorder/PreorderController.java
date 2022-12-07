@@ -113,10 +113,10 @@ public class PreorderController {
     return ResponseEntity.ok().body(preorder);
   }
 
-  @Operation(summary = "Получить страницу всех предзаказов текущего пользователя " +
-      "– продавца или покупателя. " +
-      "Продавец получает страницу предзаказов, которые он создал. " +
-      "Покупатель получает страницу предзаказов, в которых он участвует.")
+  @Operation(summary = "Получить страницу всех предзаказов текущего пользователя "
+      + "– продавца или покупателя. "
+      + "Продавец получает страницу предзаказов, которые он создал. "
+      + "Покупатель получает страницу предзаказов, в которых он участвует.")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200",
           description = "Получена страница предзаказов текущего пользователя.",
@@ -208,7 +208,7 @@ public class PreorderController {
               schema = @Schema(implementation = ServiceException.class))})})
   @GetMapping("/{preorderId}" + PREORDERS_PARTICIPATIONS_URL)
   public ResponseEntity<PreorderParticipantsDtoPage>
-  getCurrentSellerPreorderParticipationsPageByPreorderId(
+      getCurrentSellerPreorderParticipationsPageByPreorderId(
       @RequestParam(name = "page", required = false, defaultValue = "1") int pageNum,
       @PathVariable Long preorderId,
       Principal principal) {
