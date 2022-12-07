@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AuthController {
 
-  public final String AUTH_URL = "/api/v1/auth";
+  public static final String AUTH_URL = "/api/v1/auth";
 
   private final AuthService authService;
 

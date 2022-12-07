@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class CustomerController {
 
-  public final String CUSTOMER_URL = "/api/v1/customers";
+  public static final String CUSTOMER_URL = "/api/v1/customers";
 
   private final CustomerService customerService;
   private final UserAuthService userAuthService;
