@@ -6,10 +6,9 @@ import kuznetsov.marketplace.services.user.dto.UserAuthDto;
 
 public interface UserAuthMapper {
 
-  default User toCustomerUser(String email, String password) {
+  default User toCustomerUser(String email) {
     return User.builder()
         .email(email)
-        .password(password)
         .role(UserRole.CUSTOMER)
         .isEmailConfirmed(false)
         .isBanned(false)

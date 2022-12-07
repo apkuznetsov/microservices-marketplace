@@ -18,6 +18,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,8 @@ public class UserAuthServiceImpl implements UserAuthService, UserDetailsService 
 
   private final UserRepository userRepo;
   private final CustomerRepository customerRepo;
+
+  private final PasswordEncoder passwordEncoder;
 
   @Override
   public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
@@ -83,7 +86,8 @@ public class UserAuthServiceImpl implements UserAuthService, UserDetailsService 
       throw new ServiceException(USER_ALREADY_EXISTS);
     }
 
-    User newUser = userAuthMapper.toCustomerUser(email, password);
+    User newUser = userAuthMapper.toCustomerUser(email);
+    newUser.setPassword(passwordEncoder.encode(password));
     User savedUser = userRepo.saveAndFlush(newUser);
 
     Customer customer = customerMapper.toCustomer(savedUser);

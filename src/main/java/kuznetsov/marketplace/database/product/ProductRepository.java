@@ -16,6 +16,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
   Page<Product> findAllBySellerAndPreorderInfo_IdNotNull(Seller seller, Pageable page);
 
+  Page<Product> findAllByCategory_Id(long categoryId, Pageable page);
+
   @Query("SELECT product FROM Product product"
       + " INNER JOIN PreorderInfo preorderInfo"
       + " ON product.preorderInfo.id = preorderInfo.id"
