@@ -1,11 +1,15 @@
 package kuznetsov.marketplace.services.product;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import kuznetsov.marketplace.models.product.Product;
 import kuznetsov.marketplace.models.product.ProductCategory;
 import kuznetsov.marketplace.models.user.Seller;
 import kuznetsov.marketplace.services.product.dto.ProductCategoryDto;
 import kuznetsov.marketplace.services.product.dto.ProductDto;
+import kuznetsov.marketplace.services.product.dto.ProductDtoPage;
 import kuznetsov.marketplace.services.user.dto.SellerDto;
+import org.springframework.data.domain.Page;
 
 public interface ProductMapper {
 
@@ -19,16 +23,20 @@ public interface ProductMapper {
   }
 
   default Product toProduct(ProductDto productDto, ProductCategory category, Seller seller) {
-    Product product = this.toProduct(productDto);
+    Product product = toProduct(productDto);
     product.setCategory(category);
     product.setSeller(seller);
 
     return product;
   }
 
+  default ProductDto toProductDto(Product product) {
+    return toProductDto(product, product.getCategory(), product.getSeller());
+  }
+
   default ProductDto toProductDto(Product product, ProductCategory category, Seller seller) {
-    ProductCategoryDto categoryDto = this.toProductCategoryDto(category);
-    SellerDto sellerDto = this.toProductSellerDto(seller);
+    ProductCategoryDto categoryDto = toProductCategoryDto(category);
+    SellerDto sellerDto = toProductSellerDto(seller);
 
     return ProductDto.builder()
         .id(product.getId())
@@ -43,6 +51,20 @@ public interface ProductMapper {
         .sellerCountry(sellerDto.getCountry())
         .sellerEmail(sellerDto.getEmail())
         .imageUrls(null)
+        .build();
+  }
+
+  default ProductDtoPage toProductDtoPage(Page<Product> productsPage) {
+    List<ProductDto> productDtoList = productsPage.getContent().stream()
+        .map(this::toProductDto)
+        .collect(Collectors.toList());
+
+    return ProductDtoPage.builder()
+        .totalProducts(productsPage.getTotalElements())
+        .totalProductsPages(productsPage.getTotalPages())
+        .productsMaxPageSize(productsPage.getSize())
+        .productsPageNumber(productsPage.getNumber() + 1)
+        .products(productDtoList)
         .build();
   }
 

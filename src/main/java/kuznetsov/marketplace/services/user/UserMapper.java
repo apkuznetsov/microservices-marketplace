@@ -9,8 +9,7 @@ public interface UserMapper {
     return UserDto.builder()
         .id(user.getId())
         .email(user.getEmail())
-        .isEmailConfirmed(user.isEmailConfirmed())
-        .isBanned(user.isBanned())
+        .role(user.getRole())
         .build();
   }
 

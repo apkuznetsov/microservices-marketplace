@@ -1,8 +1,10 @@
 package kuznetsov.marketplace.services.product;
 
+import static kuznetsov.marketplace.services.pagination.PageErrorCode.NOT_POSITIVE_PAGE_NUMBER;
 import static kuznetsov.marketplace.services.product.ProductCategoryErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
 import static kuznetsov.marketplace.services.product.ProductErrorCode.PRODUCT_NOT_FOUND;
 import static kuznetsov.marketplace.services.user.SellerErrorCode.SELLER_NOT_FOUND;
+import static kuznetsov.marketplace.services.user.UserErrorCode.USER_HAS_NO_PERMISSION;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +19,11 @@ import kuznetsov.marketplace.models.product.ProductImageUrl;
 import kuznetsov.marketplace.models.user.Seller;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import kuznetsov.marketplace.services.product.dto.ProductDto;
+import kuznetsov.marketplace.services.product.dto.ProductDtoPage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -55,11 +61,64 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
+  @Transactional
+  public ProductDto updateSellerProductById(
+      String sellerEmail, long productId, ProductDto productDto) {
+
+    productValidator.validateOrThrow(productProps, productDto);
+
+    Seller seller = sellerRepo.findByUserEmail(sellerEmail)
+        .orElseThrow(() -> new ServiceException(SELLER_NOT_FOUND));
+    Product product = productRepo.findById(productId)
+        .orElseThrow(() -> new ServiceException(PRODUCT_NOT_FOUND));
+    if (seller != product.getSeller()) {
+      throw new ServiceException(USER_HAS_NO_PERMISSION);
+    }
+
+    ProductCategory category = categoryRepo.findById(productDto.getCategoryId())
+        .orElseThrow(() -> new ServiceException(PRODUCT_CATEGORY_NOT_FOUND));
+    imageUrlRepo.deleteAllByProduct_Id(productId);
+
+    Product newProduct = productMapper.toProduct(productDto, category, seller);
+    newProduct.setId(productId);
+    Product updatedProduct = productRepo.saveAndFlush(newProduct);
+
+    return productMapper.toProductDto(updatedProduct);
+  }
+
+  @Override
   public ProductDto getProductById(long productId) {
     Product product = productRepo.findById(productId)
         .orElseThrow(() -> new ServiceException(PRODUCT_NOT_FOUND));
 
     return productMapper.toProductDto(product, product.getCategory(), product.getSeller());
+  }
+
+  @Override
+  public ProductDtoPage getPagedSellerProducts(String sellerEmail, int pageNum) {
+    --pageNum;
+    if (pageNum < 0) {
+      throw new ServiceException(NOT_POSITIVE_PAGE_NUMBER);
+    }
+
+    Seller seller = sellerRepo.findByUserEmail(sellerEmail)
+        .orElseThrow(() -> new ServiceException(SELLER_NOT_FOUND));
+    Pageable page = PageRequest.of(pageNum, productProps.getPageSize());
+    Page<Product> pagedProducts = productRepo
+        .findAllBySellerAndPreorderInfo_IdIsNull(seller, page);
+
+    return productMapper.toProductDtoPage(pagedProducts);
+  }
+
+  @Override
+  public void deleteSellerProductById(String sellerEmail, long productId) {
+    Seller seller = sellerRepo.findByUserEmail(sellerEmail)
+        .orElseThrow(() -> new ServiceException(SELLER_NOT_FOUND));
+    Product product = productRepo.findById(productId)
+        .orElseThrow(() -> new ServiceException(PRODUCT_NOT_FOUND));
+    if (seller != product.getSeller()) {
+      throw new ServiceException(USER_HAS_NO_PERMISSION);
+    }
   }
 
   private List<ProductImageUrl> saveAllAndFlushProductImageUrls(

@@ -1,5 +1,6 @@
 package kuznetsov.marketplace.services.user.dto;
 
+import kuznetsov.marketplace.models.user.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +16,6 @@ public class UserDto {
 
   private String email;
 
-  private Boolean isBanned;
-
-  private Boolean isEmailConfirmed;
+  private UserRole role;
 
 }

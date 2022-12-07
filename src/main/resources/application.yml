@@ -34,6 +34,7 @@ emailing:
   protocol: ${EMAILING_PROTOCOL:smtps}
 
 product:
+  page-size: 10
   min-price: 1
   max-price: 1000000
   category:

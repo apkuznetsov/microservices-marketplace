@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 @Data
 public class ProductProperties {
 
+  private Integer pageSize;
+
   private Integer minPrice;
   private Integer maxPrice;
 
