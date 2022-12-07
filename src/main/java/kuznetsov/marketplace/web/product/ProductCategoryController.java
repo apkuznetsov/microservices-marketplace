@@ -28,7 +28,7 @@ public class ProductCategoryController {
   @PostMapping(path = CATEGORY_URL)
   @ModeratorPermission
   public ResponseEntity<ProductCategoryDto> addCategory(@RequestBody ProductCategoryDto category) {
-    log.info("Add new category {}", category.getName());
+    log.info("Moderator tries to add new category {}", category.getName());
     ProductCategoryDto addedCategory = categoryService.addCategory(category);
 
     URI addedCategoryUri = URI.create(CATEGORY_URL + "/" + addedCategory.getId());
@@ -40,7 +40,8 @@ public class ProductCategoryController {
   public ResponseEntity<ProductCategoryDto> updateCategory(
       @PathVariable long id, @RequestBody ProductCategoryDto categoryDto) {
 
-    log.info("Update category {} id by new values {}", id, categoryDto.getName());
+    log.info("Moderator tries to update category {} id by new values {}",
+        id, categoryDto.getName());
     ProductCategoryDto updatedCategory = categoryService.updateCategory(id, categoryDto);
 
     return ResponseEntity.ok(updatedCategory);
