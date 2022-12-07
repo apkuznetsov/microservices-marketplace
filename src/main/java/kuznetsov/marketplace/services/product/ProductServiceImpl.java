@@ -77,8 +77,10 @@ public class ProductServiceImpl implements ProductService {
 
     ProductCategory category = categoryRepo.findById(productDto.getCategoryId())
         .orElseThrow(() -> new ServiceException(PRODUCT_CATEGORY_NOT_FOUND));
+    imageUrlRepo.deleteAllByProduct_Id(productId);
+
     Product newProduct = productMapper.toProduct(productDto, category, seller);
-    newProduct.setId(product.getId());
+    newProduct.setId(productId);
     Product updatedProduct = productRepo.saveAndFlush(newProduct);
 
     return productMapper.toProductDto(updatedProduct);
