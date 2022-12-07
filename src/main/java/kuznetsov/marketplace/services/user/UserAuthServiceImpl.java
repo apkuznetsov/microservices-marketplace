@@ -83,7 +83,7 @@ public class UserAuthServiceImpl implements UserAuthService, UserDetailsService 
       throw new ServiceException(USER_ALREADY_EXISTS);
     }
 
-    User newUser = customerMapper.toCustomerUser(email, password);
+    User newUser = userAuthMapper.toCustomerUser(email, password);
     User savedUser = userRepo.saveAndFlush(newUser);
 
     Customer customer = customerMapper.toCustomer(savedUser);
