@@ -13,6 +13,15 @@ public interface CustomerMapper {
         .build();
   }
 
+  default Customer toCustomer(CustomerDto customerDto) {
+    return Customer.builder()
+        .publicEmail(customerDto.getEmail())
+        .name(customerDto.getName())
+        .address(customerDto.getAddress())
+        .country(customerDto.getCountry())
+        .build();
+  }
+
   default CustomerDto toCustomerDto(Customer customer) {
     return CustomerDto.builder()
         .id(customer.getId())
