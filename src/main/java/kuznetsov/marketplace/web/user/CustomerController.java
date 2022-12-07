@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class CustomerController {
 
-  public final String CUSTOMERS_URL = "/api/v1/customers";
+  public final String CUSTOMER_URL = "/api/v1/customers";
 
   private final CustomerService customerService;
   private final UserAuthService userAuthService;
 
-  @PostMapping(path = CUSTOMERS_URL)
+  @PostMapping(path = CUSTOMER_URL)
   public ResponseEntity<UserAuthDto> registerCustomer(
       @RequestBody CustomerRequest customerRequest) {
 
@@ -37,11 +37,11 @@ public class CustomerController {
     UserAuthDto registeredCustomer = userAuthService.registerCustomer(
         customerRequest.getEmail(), customerRequest.getPassword());
 
-    URI registeredCustomerUri = URI.create(CUSTOMERS_URL + "/" + registeredCustomer.getId());
+    URI registeredCustomerUri = URI.create(CUSTOMER_URL + "/" + registeredCustomer.getId());
     return ResponseEntity.created(registeredCustomerUri).body(registeredCustomer);
   }
 
-  @PutMapping(path = CUSTOMERS_URL + "/{id}")
+  @PutMapping(path = CUSTOMER_URL + "/{id}")
   @CustomerPermission
   public ResponseEntity<CustomerDto> updateCustomerById(
       @PathVariable long id, @RequestBody CustomerDto customer, Principal principal) {
@@ -54,7 +54,7 @@ public class CustomerController {
     return ResponseEntity.ok(updatedCustomer);
   }
 
-  @GetMapping(path = CUSTOMERS_URL + "/{id}")
+  @GetMapping(path = CUSTOMER_URL + "/{id}")
   public ResponseEntity<CustomerDto> getCustomerById(long id) {
     log.info("Someone tries to get customer with {} id.", id);
     CustomerDto customer = customerService.getCustomerById(id);
