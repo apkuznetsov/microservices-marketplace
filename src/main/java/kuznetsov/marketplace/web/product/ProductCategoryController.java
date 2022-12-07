@@ -36,6 +36,7 @@ public class ProductCategoryController {
   }
 
   @PutMapping(path = CATEGORY_URL + "/{id}")
+  @ModeratorPermission
   public ResponseEntity<ProductCategoryDto> updateCategory(
       @PathVariable long id, @RequestBody ProductCategoryDto categoryDto) {
 
