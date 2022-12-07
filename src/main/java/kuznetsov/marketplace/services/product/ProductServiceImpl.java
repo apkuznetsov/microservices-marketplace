@@ -61,6 +61,30 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
+  @Transactional
+  public ProductDto updateSellerProductById(
+      String sellerEmail, long productId, ProductDto productDto) {
+
+    productValidator.validateOrThrow(productProps, productDto);
+
+    Seller seller = sellerRepo.findByUserEmail(sellerEmail)
+        .orElseThrow(() -> new ServiceException(SELLER_NOT_FOUND));
+    Product product = productRepo.findById(productId)
+        .orElseThrow(() -> new ServiceException(PRODUCT_NOT_FOUND));
+    if (seller != product.getSeller()) {
+      throw new ServiceException(USER_HAS_NO_PERMISSION);
+    }
+
+    ProductCategory category = categoryRepo.findById(productDto.getCategoryId())
+        .orElseThrow(() -> new ServiceException(PRODUCT_CATEGORY_NOT_FOUND));
+    Product newProduct = productMapper.toProduct(productDto, category, seller);
+    newProduct.setId(product.getId());
+    Product updatedProduct = productRepo.saveAndFlush(newProduct);
+
+    return productMapper.toProductDto(updatedProduct);
+  }
+
+  @Override
   public ProductDto getProductById(long productId) {
     Product product = productRepo.findById(productId)
         .orElseThrow(() -> new ServiceException(PRODUCT_NOT_FOUND));

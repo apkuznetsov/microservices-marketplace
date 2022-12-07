@@ -7,6 +7,8 @@ public interface ProductService {
 
   ProductDto addSellerProduct(String sellerEmail, ProductDto productDto);
 
+  ProductDto updateSellerProductById(String sellerEmail, long productId, ProductDto productDto);
+
   ProductDto getProductById(long productId);
 
   ProductDtoPage getPagedSellerProducts(String sellerEmail, int pageNum);
