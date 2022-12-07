@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class ActivationController {
 
-  public final String ACTIVATION_URL = "/api/v1/activation";
+  public static final String ACTIVATION_URL = "/api/v1/activation";
 
   private final ActivationService activationService;
 

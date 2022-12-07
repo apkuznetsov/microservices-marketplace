@@ -1,10 +1,8 @@
 package kuznetsov.marketplace.services.user;
 
-import static kuznetsov.marketplace.services.user.CustomerErrorCode.CUSTOMER_NOT_FOUND;
 import static kuznetsov.marketplace.services.user.SellerErrorCode.SELLER_NOT_FOUND;
 
 import kuznetsov.marketplace.database.user.SellerRepository;
-import kuznetsov.marketplace.models.user.Customer;
 import kuznetsov.marketplace.models.user.Seller;
 import kuznetsov.marketplace.services.exception.ServiceException;
 import kuznetsov.marketplace.services.user.dto.SellerDto;

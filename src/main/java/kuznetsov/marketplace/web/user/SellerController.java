@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class SellerController {
 
-  public final String SELLER_URL = "/api/v1/sellers";
+  public static final String SELLER_URL = "/api/v1/sellers";
 
   private final SellerService sellerService;
 

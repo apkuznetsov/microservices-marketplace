@@ -2,6 +2,7 @@ plugins {
     id "java"
     id "org.springframework.boot" version "2.7.5"
     id "io.spring.dependency-management" version "1.0.15.RELEASE"
+    id "checkstyle"
 }
 
 group = "kuznetsov"
@@ -36,6 +37,14 @@ dependencies {
     runtimeOnly "org.postgresql:postgresql"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
+}
+
+checkstyle {
+    showViolations = true
+    toolVersion "10.3.4"
+    maxWarnings = 0
+    maxErrors = 0
+    configFile file("checkstyle/google.xml")
 }
 
 tasks.named("test") {

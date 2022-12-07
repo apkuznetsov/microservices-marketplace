@@ -23,7 +23,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Entity
 @Table(name = "preorder_participation",
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"pp_preorder_id", "pp_client_id"})
+        @UniqueConstraint(columnNames = {"pp_preorder_id", "pp_customer_id"})
     })
 @Data
 @NoArgsConstructor
