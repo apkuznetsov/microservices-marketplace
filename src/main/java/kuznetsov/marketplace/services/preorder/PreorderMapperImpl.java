@@ -14,8 +14,8 @@ import kuznetsov.marketplace.models.user.Seller;
 import kuznetsov.marketplace.models.user.UserRole;
 import kuznetsov.marketplace.services.preorder.dto.PreorderDto;
 import kuznetsov.marketplace.services.preorder.dto.PreorderDtoPage;
-import kuznetsov.marketplace.services.user.UserInfoService;
-import kuznetsov.marketplace.services.user.dto.UserInfoDto;
+import kuznetsov.marketplace.services.user.UserService;
+import kuznetsov.marketplace.services.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -28,7 +28,7 @@ public class PreorderMapperImpl implements PreorderMapper {
   private final SellerRepository sellerRepo;
   private final CustomerRepository customerRepo;
 
-  private final UserInfoService userInfoService;
+  private final UserService userService;
 
   @Override
   public PreorderDto toPreorderDto(Product product) {
@@ -80,16 +80,16 @@ public class PreorderMapperImpl implements PreorderMapper {
       PreorderDto preorderDto, Product product, String userEmail) {
 
     preorderDto.setCurrentUserParticipationStatus(null);
-    UserInfoDto userInfoDto = userInfoService.getUserInfoByEmailOrNull(userEmail);
-    if (userInfoDto == null) {
+    UserDto userDto = userService.getUserByEmail(userEmail);
+    if (userDto == null) {
       return;
     }
-    UserRole userRole = userInfoDto.getRole();
+    UserRole userRole = userDto.getRole();
 
     switch (userRole) {
       case SELLER:
         Seller userAsSeller = sellerRepo
-            .findByUserEmail(userInfoDto.getEmail())
+            .findByUserEmail(userDto.getEmail())
             .orElse(null);
         if (userAsSeller != null
             && Objects.equals(preorderDto.getSellerId(), userAsSeller.getId())) {
@@ -98,7 +98,7 @@ public class PreorderMapperImpl implements PreorderMapper {
         break;
       case CUSTOMER:
         Customer userAsCustomer = customerRepo
-            .findByUserEmail(userInfoDto.getEmail())
+            .findByUserEmail(userDto.getEmail())
             .orElse(null);
         PreorderParticipation userParticipation = preorderParticipationRepo
             .findByProductAndClient(product, userAsCustomer);

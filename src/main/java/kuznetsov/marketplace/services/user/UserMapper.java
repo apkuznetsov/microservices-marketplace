@@ -1,12 +1,12 @@
 package kuznetsov.marketplace.services.user;
 
 import kuznetsov.marketplace.models.user.User;
-import kuznetsov.marketplace.services.user.dto.UserInfoDto;
+import kuznetsov.marketplace.services.user.dto.UserDto;
 
-public interface UserInfoMapper {
+public interface UserMapper {
 
-  default UserInfoDto toUserInfo(User user) {
-    return UserInfoDto.builder()
+  default UserDto toUserDto(User user) {
+    return UserDto.builder()
         .id(user.getId())
         .email(user.getEmail())
         .role(user.getRole())

@@ -51,7 +51,7 @@ public class UserAuthServiceImpl implements UserAuthService, UserDetailsService 
 
   @Override
   @Transactional(readOnly = true)
-  public UserAuthDto getUserByEmail(String userEmail) {
+  public UserAuthDto getUserAuthByEmail(String userEmail) {
     User user = userRepo
         .findByEmail(userEmail)
         .orElseThrow(() -> new ServiceException(USER_NOT_FOUND));

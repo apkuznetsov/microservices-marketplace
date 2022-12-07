@@ -53,7 +53,7 @@ public class JwtFilter extends OncePerRequestFilter {
         new SimpleGrantedAuthority(
             jwtService.getRoleFromAccessToken(token))
     );
-    UserAuthDto user = userAuthService.getUserByEmail(userEmail);
+    UserAuthDto user = userAuthService.getUserAuthByEmail(userEmail);
     if (user.getIsBanned()
         || !user.getIsEmailConfirmed()) {
       return;
