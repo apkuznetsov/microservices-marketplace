@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class ProductController {
 
-  public final String PRODUCT_URL = "/api/products";
-  public final String PRODUCT_BY_CATEGORY = "/api/categories";
+  public final String PRODUCT_URL = "/api/v1/products";
+  public final String PRODUCT_BY_CATEGORY = "/api/v1/categories";
 
   private final ProductService productService;
 
