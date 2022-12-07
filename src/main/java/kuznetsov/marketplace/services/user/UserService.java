@@ -8,4 +8,6 @@ public interface UserService {
 
   UserDto confirmUserEmail(String userEmail);
 
+  UserDto registerCustomer(String email, String password);
+
 }
