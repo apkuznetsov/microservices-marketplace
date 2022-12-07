@@ -4,6 +4,7 @@ import static kuznetsov.marketplace.services.pagination.PageErrorCode.NOT_POSITI
 import static kuznetsov.marketplace.services.product.ProductCategoryErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
 import static kuznetsov.marketplace.services.product.ProductErrorCode.PRODUCT_NOT_FOUND;
 import static kuznetsov.marketplace.services.user.SellerErrorCode.SELLER_NOT_FOUND;
+import static kuznetsov.marketplace.services.user.UserErrorCode.USER_HAS_NO_PERMISSION;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -81,6 +82,17 @@ public class ProductServiceImpl implements ProductService {
         .findAllBySellerAndPreorderInfo_IdNotNull(seller, page);
 
     return productMapper.toProductDtoPage(pagedProducts);
+  }
+
+  @Override
+  public void deleteSellerProductById(String sellerEmail, long productId) {
+    Seller seller = sellerRepo.findByUserEmail(sellerEmail)
+        .orElseThrow(() -> new ServiceException(SELLER_NOT_FOUND));
+    Product product = productRepo.findById(productId)
+        .orElseThrow(() -> new ServiceException(PRODUCT_NOT_FOUND));
+    if (seller != product.getSeller()) {
+      throw new ServiceException(USER_HAS_NO_PERMISSION);
+    }
   }
 
   private List<ProductImageUrl> saveAllAndFlushProductImageUrls(
