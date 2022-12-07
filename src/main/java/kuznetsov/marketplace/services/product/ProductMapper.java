@@ -2,12 +2,14 @@ package kuznetsov.marketplace.services.product;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import kuznetsov.marketplace.models.preorder.PreorderInfo;
 import kuznetsov.marketplace.models.product.Product;
 import kuznetsov.marketplace.models.product.ProductCategory;
 import kuznetsov.marketplace.models.user.Seller;
 import kuznetsov.marketplace.services.product.dto.ProductCategoryDto;
 import kuznetsov.marketplace.services.product.dto.ProductDto;
 import kuznetsov.marketplace.services.product.dto.ProductDtoPage;
+import kuznetsov.marketplace.services.product.dto.ProductPreorderDto;
 import kuznetsov.marketplace.services.user.dto.SellerDto;
 import org.springframework.data.domain.Page;
 
@@ -37,6 +39,7 @@ public interface ProductMapper {
   default ProductDto toProductDto(Product product, ProductCategory category, Seller seller) {
     ProductCategoryDto categoryDto = toProductCategoryDto(category);
     SellerDto sellerDto = toProductSellerDto(seller);
+    ProductPreorderDto productPreorderDto = toProductPreorderDto(product);
 
     return ProductDto.builder()
         .id(product.getId())
@@ -50,6 +53,7 @@ public interface ProductMapper {
         .sellerAddress(sellerDto.getAddress())
         .sellerCountry(sellerDto.getCountry())
         .sellerEmail(sellerDto.getEmail())
+        .preorder(productPreorderDto)
         .imageUrls(null)
         .build();
   }
@@ -92,6 +96,23 @@ public interface ProductMapper {
         .country(seller.getCountry())
         .email(seller.getPublicEmail())
         .build();
+  }
+
+  private ProductPreorderDto toProductPreorderDto(Product product) {
+    ProductPreorderDto productPreorderDto;
+    PreorderInfo preorderInfo = product.getPreorderInfo();
+    if (preorderInfo == null) {
+      productPreorderDto = null;
+    } else {
+      productPreorderDto = ProductPreorderDto.builder()
+          .priceWithoutDiscount(preorderInfo.getCentPriceWithoutDiscount() / 100.0)
+          .preorderStatus(preorderInfo.getPreorderStatus())
+          .preorderExpectedQuantity(preorderInfo.getPreorderExpectedQuantity())
+          .preorderEndsAt(preorderInfo.getPreorderEndsAt())
+          .build();
+    }
+
+    return productPreorderDto;
   }
 
 }

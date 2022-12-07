@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.services.preorder.dto;
+package kuznetsov.marketplace.services.product.dto;
 
 import java.time.LocalDateTime;
 import kuznetsov.marketplace.models.preorder.PreorderStatus;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PreorderDetailsDto {
+public class ProductPreorderDto {
 
   private Double priceWithoutDiscount;
 

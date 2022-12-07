@@ -34,6 +34,8 @@ public class ProductDto {
 
   private String sellerEmail;
 
+  private ProductPreorderDto preorder;
+
   private List<String> imageUrls;
 
 }
