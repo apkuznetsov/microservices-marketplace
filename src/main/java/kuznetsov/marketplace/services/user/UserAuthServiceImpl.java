@@ -10,16 +10,16 @@ import kuznetsov.marketplace.database.user.UserRepository;
 import kuznetsov.marketplace.models.user.Customer;
 import kuznetsov.marketplace.models.user.User;
 import kuznetsov.marketplace.services.exception.ServiceException;
-import kuznetsov.marketplace.services.user.dto.UserDto;
+import kuznetsov.marketplace.services.user.dto.UserAuthDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserAuthServiceImpl implements UserAuthService {
 
-  private final UserMapper userMapper;
+  private final UserAuthMapper userAuthMapper;
   private final CustomerMapper customerMapper;
   private final CustomerPublisher customerPublisher;
 
@@ -28,16 +28,16 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional(readOnly = true)
-  public UserDto getUserByEmail(String userEmail) {
+  public UserAuthDto getUserByEmail(String userEmail) {
     User user = userRepo
         .findByEmail(userEmail)
         .orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
 
-    return userMapper.toUserDto(user);
+    return userAuthMapper.toUserDto(user);
   }
 
   @Override
-  public UserDto confirmUserEmail(String userEmail) {
+  public UserAuthDto confirmUserEmail(String userEmail) {
     User user = userRepo
         .findByEmail(userEmail)
         .orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
@@ -49,12 +49,12 @@ public class UserServiceImpl implements UserService {
     user.setEmailConfirmed(true);
     User updatedUser = userRepo.saveAndFlush(user);
 
-    return userMapper.toUserDto(updatedUser);
+    return userAuthMapper.toUserDto(updatedUser);
   }
 
   @Override
   @Transactional
-  public UserDto registerCustomer(String email, String password) {
+  public UserAuthDto registerCustomer(String email, String password) {
     Optional<User> optUser = userRepo.findByEmail(email);
     if (optUser.isPresent()) {
       throw new ServiceException(USER_ALREADY_EXISTS);
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
     customerPublisher.publishCustomerRegistrationEvent(
         savedUser.getEmail(), savedUser.getRole().name());
-    return userMapper.toUserDto(savedUser);
+    return userAuthMapper.toUserDto(savedUser);
   }
 
 }

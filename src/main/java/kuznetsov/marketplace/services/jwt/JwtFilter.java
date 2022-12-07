@@ -6,8 +6,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import kuznetsov.marketplace.services.user.UserService;
-import kuznetsov.marketplace.services.user.dto.UserDto;
+import kuznetsov.marketplace.services.user.UserAuthService;
+import kuznetsov.marketplace.services.user.dto.UserAuthDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,7 +23,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtFilter extends OncePerRequestFilter {
 
   private final JwtService jwtService;
-  private final UserService userService;
+  private final UserAuthService userAuthService;
 
   @Override
   protected void doFilterInternal(
@@ -53,7 +53,7 @@ public class JwtFilter extends OncePerRequestFilter {
         new SimpleGrantedAuthority(
             jwtService.getRoleFromAccessToken(token))
     );
-    UserDto user = userService.getUserByEmail(userEmail);
+    UserAuthDto user = userAuthService.getUserByEmail(userEmail);
     if (user.getIsBanned()
         || !user.getIsEmailConfirmed()) {
       return;

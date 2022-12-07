@@ -1,9 +1,9 @@
 package kuznetsov.marketplace.web.customer;
 
 import java.net.URI;
-import kuznetsov.marketplace.services.user.UserService;
+import kuznetsov.marketplace.services.user.UserAuthService;
 import kuznetsov.marketplace.services.user.dto.CustomerRequest;
-import kuznetsov.marketplace.services.user.dto.UserDto;
+import kuznetsov.marketplace.services.user.dto.UserAuthDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +18,15 @@ public class CustomerController {
 
   public final String CUSTOMERS_URL = "/api/v1/customers";
 
-  private final UserService userService;
+  private final UserAuthService userAuthService;
 
   @PostMapping(path = CUSTOMERS_URL)
-  public ResponseEntity<UserDto> registerCustomer(
+  public ResponseEntity<UserAuthDto> registerCustomer(
       @RequestBody CustomerRequest customerRequest) {
 
     log.info("The customer with {} email is trying to register as a customer.",
         customerRequest.getEmail());
-    UserDto registeredCustomer = userService.registerCustomer(
+    UserAuthDto registeredCustomer = userAuthService.registerCustomer(
         customerRequest.getEmail(), customerRequest.getPassword());
 
     URI registeredCustomerUri = URI.create(CUSTOMERS_URL + "/" + registeredCustomer.getId());
