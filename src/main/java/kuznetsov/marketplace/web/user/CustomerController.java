@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.web.customer;
+package kuznetsov.marketplace.web.user;
 
 import java.net.URI;
 import kuznetsov.marketplace.services.user.UserAuthService;
