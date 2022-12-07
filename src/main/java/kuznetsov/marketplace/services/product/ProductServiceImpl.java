@@ -79,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
         .orElseThrow(() -> new ServiceException(SELLER_NOT_FOUND));
     Pageable page = PageRequest.of(pageNum, productProps.getPageSize());
     Page<Product> pagedProducts = productRepo
-        .findAllBySellerAndPreorderInfo_IdNotNull(seller, page);
+        .findAllBySellerAndPreorderInfo_IdIsNull(seller, page);
 
     return productMapper.toProductDtoPage(pagedProducts);
   }

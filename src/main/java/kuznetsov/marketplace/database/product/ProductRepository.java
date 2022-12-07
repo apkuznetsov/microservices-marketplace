@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
+  Page<Product> findAllBySellerAndPreorderInfo_IdIsNull(Seller seller, Pageable page);
+
   Page<Product> findAllBySellerAndPreorderInfo_IdNotNull(Seller seller, Pageable page);
 
   @Query("SELECT product FROM Product product"
