@@ -11,6 +11,8 @@ public interface ProductService {
 
   ProductDto getProductById(long productId);
 
+  ProductDtoPage getPagedProductsByCategoryId(long categoryId, int pageNum);
+
   ProductDtoPage getPagedSellerProducts(String sellerEmail, int pageNum);
 
   void deleteSellerProductById(String sellerEmail, long productId);

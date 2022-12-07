@@ -95,6 +95,19 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
+  public ProductDtoPage getPagedProductsByCategoryId(long categoryId, int pageNum) {
+    --pageNum;
+    if (pageNum < 0) {
+      throw new ServiceException(NOT_POSITIVE_PAGE_NUMBER);
+    }
+
+    Pageable page = PageRequest.of(pageNum, productProps.getPageSize());
+    Page<Product> pagedProducts = productRepo.findAllByCategory_Id(categoryId, page);
+
+    return productMapper.toProductDtoPage(pagedProducts);
+  }
+
+  @Override
   public ProductDtoPage getPagedSellerProducts(String sellerEmail, int pageNum) {
     --pageNum;
     if (pageNum < 0) {
