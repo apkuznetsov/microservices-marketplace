@@ -41,7 +41,7 @@ public class Seller {
 
   @Column(name = "public_email", nullable = false, length = 255)
   private String publicEmail;
-  
+
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "s_user_id", nullable = false)
   private User user;
