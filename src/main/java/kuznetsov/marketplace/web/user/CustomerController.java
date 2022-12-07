@@ -1,6 +1,8 @@
 package kuznetsov.marketplace.web.user;
 
 import java.net.URI;
+import java.security.Principal;
+import kuznetsov.marketplace.services.security.CustomerPermission;
 import kuznetsov.marketplace.services.user.CustomerService;
 import kuznetsov.marketplace.services.user.UserAuthService;
 import kuznetsov.marketplace.services.user.dto.CustomerDto;
@@ -10,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +39,19 @@ public class CustomerController {
 
     URI registeredCustomerUri = URI.create(CUSTOMERS_URL + "/" + registeredCustomer.getId());
     return ResponseEntity.created(registeredCustomerUri).body(registeredCustomer);
+  }
+
+  @PutMapping(path = CUSTOMERS_URL + "/{id}")
+  @CustomerPermission
+  public ResponseEntity<CustomerDto> updateCustomerById(
+      @PathVariable long id, @RequestBody CustomerDto customer, Principal principal) {
+
+    String customerEmail = principal.getName();
+    log.info("Customer {} tries to update profile {} id by new values {}",
+        customerEmail, id, customer.getName());
+    CustomerDto updatedCustomer = customerService.updateCustomerById(id, customer);
+
+    return ResponseEntity.ok(updatedCustomer);
   }
 
   @GetMapping(path = CUSTOMERS_URL + "/{id}")

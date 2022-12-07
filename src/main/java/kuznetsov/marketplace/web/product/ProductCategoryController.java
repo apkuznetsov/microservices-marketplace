@@ -37,7 +37,7 @@ public class ProductCategoryController {
 
   @PutMapping(path = CATEGORY_URL + "/{id}")
   @ModeratorPermission
-  public ResponseEntity<ProductCategoryDto> updateCategory(
+  public ResponseEntity<ProductCategoryDto> updateCategoryById(
       @PathVariable long id, @RequestBody ProductCategoryDto categoryDto) {
 
     log.info("Moderator tries to update category {} id by new values {}",
