@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,8 @@ public class ProductController {
   @PostMapping(path = PRODUCT_URL)
   @SellerPermission
   public ResponseEntity<ProductDto> addProduct(
-      @RequestBody ProductDto product, Principal principal) {
+      @RequestBody ProductDto product,
+      Principal principal) {
 
     String sellerEmail = principal.getName();
     log.info("The seller with {} email tries to add product {}.", sellerEmail, product.getTitle());
@@ -39,6 +41,21 @@ public class ProductController {
     return ResponseEntity.created(createdProductUri)
         .body(createdProduct);
 
+  }
+
+  @PutMapping(path = PRODUCT_URL + "/{id}")
+  @SellerPermission
+  public ResponseEntity<ProductDto> updateProductById(
+      @PathVariable Long id,
+      @RequestBody ProductDto product,
+      Principal principal) {
+
+    String sellerEmail = principal.getName();
+    log.info("The seller with {} email tries to update product {}.",
+        sellerEmail, product.getTitle());
+    ProductDto updatedProduct = productService.updateSellerProductById(sellerEmail, id, product);
+
+    return ResponseEntity.ok(updatedProduct);
   }
 
   @GetMapping(path = PRODUCT_URL + "/{id}")
