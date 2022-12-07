@@ -28,7 +28,7 @@ public class SellerController {
       @PathVariable long id, @RequestBody SellerDto seller, Principal principal) {
 
     String sellerEmail = principal.getName();
-    log.info("Seller {} tries to update profile {} id by new values {}",
+    log.info("Seller {} is trying to update profile {} id by new values {}",
         sellerEmail, id, seller.getName());
     SellerDto updatedSeller = sellerService.updateSellerById(id, seller);
 
@@ -37,7 +37,7 @@ public class SellerController {
 
   @GetMapping(path = SELLER_URL + "/{id}")
   public ResponseEntity<SellerDto> getSellerById(long id) {
-    log.info("Someone tries to get seller with {} id.", id);
+    log.info("Someone is trying to get seller with {} id.", id);
     SellerDto seller = sellerService.getSellerById(id);
 
     return ResponseEntity.ok().body(seller);

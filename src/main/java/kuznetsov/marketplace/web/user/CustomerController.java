@@ -47,7 +47,7 @@ public class CustomerController {
       @PathVariable long id, @RequestBody CustomerDto customer, Principal principal) {
 
     String customerEmail = principal.getName();
-    log.info("Customer {} tries to update profile {} id by new values {}",
+    log.info("Customer {} is trying to update profile {} id by new values {}",
         customerEmail, id, customer.getName());
     CustomerDto updatedCustomer = customerService.updateCustomerById(id, customer);
 
@@ -56,7 +56,7 @@ public class CustomerController {
 
   @GetMapping(path = CUSTOMER_URL + "/{id}")
   public ResponseEntity<CustomerDto> getCustomerById(long id) {
-    log.info("Someone tries to get customer with {} id.", id);
+    log.info("Someone is trying to get customer with {} id.", id);
     CustomerDto customer = customerService.getCustomerById(id);
 
     return ResponseEntity.ok().body(customer);

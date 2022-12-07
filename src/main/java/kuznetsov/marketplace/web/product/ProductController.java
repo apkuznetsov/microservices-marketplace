@@ -34,7 +34,8 @@ public class ProductController {
       Principal principal) {
 
     String sellerEmail = principal.getName();
-    log.info("The seller with {} email tries to add product {}.", sellerEmail, product.getTitle());
+    log.info("The seller with {} email is trying to add product {}.", sellerEmail,
+        product.getTitle());
     ProductDto createdProduct = productService.addSellerProduct(sellerEmail, product);
 
     URI createdProductUri = URI.create(PRODUCT_URL + "/" + createdProduct.getId());
@@ -51,7 +52,7 @@ public class ProductController {
       Principal principal) {
 
     String sellerEmail = principal.getName();
-    log.info("The seller with {} email tries to update product {}.",
+    log.info("The seller with {} email is trying to update product {}.",
         sellerEmail, product.getTitle());
     ProductDto updatedProduct = productService.updateSellerProductById(sellerEmail, id, product);
 
@@ -60,7 +61,7 @@ public class ProductController {
 
   @GetMapping(path = PRODUCT_URL + "/{id}")
   public ResponseEntity<ProductDto> getProductById(@RequestParam long id) {
-    log.info("Someone tries to get product with {} id.", id);
+    log.info("Someone is trying to get product with {} id.", id);
     ProductDto product = productService.getProductById(id);
 
     return ResponseEntity.ok(product);
@@ -71,7 +72,7 @@ public class ProductController {
       @PathVariable long id,
       @RequestParam(name = "page", required = false, defaultValue = "1") int pageNum) {
 
-    log.info("Someone tries to get paged products  {} by category {} id.", pageNum, id);
+    log.info("Someone is trying to get paged products  {} by category {} id.", pageNum, id);
     ProductDtoPage pagedProducts = productService.getPagedProductsByCategoryId(id, pageNum);
 
     return ResponseEntity.ok(pagedProducts);
