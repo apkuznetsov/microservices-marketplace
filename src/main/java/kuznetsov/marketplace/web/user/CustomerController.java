@@ -1,12 +1,15 @@
 package kuznetsov.marketplace.web.user;
 
 import java.net.URI;
+import kuznetsov.marketplace.services.user.CustomerService;
 import kuznetsov.marketplace.services.user.UserAuthService;
+import kuznetsov.marketplace.services.user.dto.CustomerDto;
 import kuznetsov.marketplace.services.user.dto.CustomerRequest;
 import kuznetsov.marketplace.services.user.dto.UserAuthDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +21,7 @@ public class CustomerController {
 
   public final String CUSTOMERS_URL = "/api/v1/customers";
 
+  private final CustomerService customerService;
   private final UserAuthService userAuthService;
 
   @PostMapping(path = CUSTOMERS_URL)
@@ -31,6 +35,14 @@ public class CustomerController {
 
     URI registeredCustomerUri = URI.create(CUSTOMERS_URL + "/" + registeredCustomer.getId());
     return ResponseEntity.created(registeredCustomerUri).body(registeredCustomer);
+  }
+
+  @GetMapping(path = CUSTOMERS_URL + "/{id}")
+  public ResponseEntity<CustomerDto> getCustomerById(long id) {
+    log.info("Someone tries to get customer with {} id.", id);
+    CustomerDto customer = customerService.getCustomerById(id);
+
+    return ResponseEntity.ok().body(customer);
   }
 
 }
