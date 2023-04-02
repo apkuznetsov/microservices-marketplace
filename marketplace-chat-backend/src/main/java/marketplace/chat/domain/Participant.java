@@ -17,7 +17,7 @@ import java.time.Instant;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Participant implements Serializable {
 
-    String id;
+    String participantId;
 
     String sessionId;
 

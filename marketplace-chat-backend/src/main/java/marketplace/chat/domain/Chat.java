@@ -6,10 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import marketplace.chat.utils.RandomIdGenerator;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -19,7 +19,7 @@ import java.time.Instant;
 public class Chat implements Serializable {
 
     @Builder.Default
-    String id = RandomIdGenerator.generate();
+    String id = UUID.randomUUID().toString().substring(0, 4);
 
     String name;
 
