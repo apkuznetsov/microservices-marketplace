@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.auth;
+package kuznetsov.marketplace.backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,12 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AuthResponse {
+public class AuthRequest {
 
-    private String type;
+    private String email;
 
-    private String accessToken;
-
-    private String role;
+    private String password;
 
 }

@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.proxy;
+package kuznetsov.marketplace.backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ActivationRequest {
+public class EmailingMessage {
 
-    private String email;
-
-    private String role;
+    private String message;
 
 }
