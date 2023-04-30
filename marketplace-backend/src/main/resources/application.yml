@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:49153/marketplace}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/marketplace_db}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:qwerty}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
@@ -28,8 +28,8 @@ activation:
 
 emailing:
   host: ${EMAILING_HOST:smtp.yandex.ru}
-  username: ${EMAILING_USERNAME}
-  password: ${EMAILING_PASSWORD}
+  username: ${EMAILING_USERNAME:example@example.com}
+  password: ${EMAILING_PASSWORD:qwerty}
   port: ${EMAILING_PORT:465}
   protocol: ${EMAILING_PROTOCOL:smtps}
 
