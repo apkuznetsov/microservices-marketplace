@@ -2,7 +2,6 @@ package kuznetsov.marketplace.backend.service;
 
 import kuznetsov.marketplace.backend.domain.Seller;
 import kuznetsov.marketplace.backend.dto.SellerDto;
-import kuznetsov.marketplace.backend.exception.ServiceException;
 import kuznetsov.marketplace.backend.repository.SellerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

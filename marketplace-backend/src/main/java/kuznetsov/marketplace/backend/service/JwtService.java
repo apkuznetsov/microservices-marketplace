@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.jwt;
+package kuznetsov.marketplace.backend.service;
 
 public interface JwtService {
 

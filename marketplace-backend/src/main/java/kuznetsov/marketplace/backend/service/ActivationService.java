@@ -1,4 +1,7 @@
-package kuznetsov.marketplace.backend.proxy;
+package kuznetsov.marketplace.backend.service;
+
+import kuznetsov.marketplace.backend.dto.ActivationMessage;
+import kuznetsov.marketplace.backend.dto.ActivationRequest;
 
 public interface ActivationService {
 

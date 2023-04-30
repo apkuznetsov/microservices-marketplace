@@ -6,8 +6,6 @@ import kuznetsov.marketplace.backend.domain.ProductImageUrl;
 import kuznetsov.marketplace.backend.domain.Seller;
 import kuznetsov.marketplace.backend.dto.ProductDto;
 import kuznetsov.marketplace.backend.dto.ProductDtoPage;
-import kuznetsov.marketplace.backend.exception.ServiceException;
-import kuznetsov.marketplace.backend.pagination.PageErrorCode;
 import kuznetsov.marketplace.backend.repository.ProductCategoryRepository;
 import kuznetsov.marketplace.backend.repository.ProductImageUrlRepository;
 import kuznetsov.marketplace.backend.repository.ProductRepository;
@@ -22,9 +20,9 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static kuznetsov.marketplace.backend.auth.UserErrorCode.USER_HAS_NO_PERMISSION;
 import static kuznetsov.marketplace.backend.service.ProductCategoryErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
 import static kuznetsov.marketplace.backend.service.SellerErrorCode.SELLER_NOT_FOUND;
+import static kuznetsov.marketplace.backend.service.UserErrorCode.USER_HAS_NO_PERMISSION;
 
 @Service
 @RequiredArgsConstructor

@@ -1,6 +1,5 @@
 package kuznetsov.marketplace.backend.service;
 
-import kuznetsov.marketplace.backend.exception.ServiceErrorCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

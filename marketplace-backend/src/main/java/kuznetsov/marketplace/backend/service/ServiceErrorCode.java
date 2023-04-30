@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.exception;
+package kuznetsov.marketplace.backend.service;
 
 import org.springframework.http.HttpStatus;
 

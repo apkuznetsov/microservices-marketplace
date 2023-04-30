@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.proxy;
+package kuznetsov.marketplace.backend.service;
 
 public interface EmailingService {
 

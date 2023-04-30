@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.auth;
+package kuznetsov.marketplace.backend.service;
 
 import org.springframework.stereotype.Component;
 

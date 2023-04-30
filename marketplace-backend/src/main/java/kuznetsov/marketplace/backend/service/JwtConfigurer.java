@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.jwt;
+package kuznetsov.marketplace.backend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;

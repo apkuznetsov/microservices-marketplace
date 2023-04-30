@@ -1,11 +1,10 @@
-package kuznetsov.marketplace.backend.auth;
+package kuznetsov.marketplace.backend.service;
 
 import kuznetsov.marketplace.backend.domain.Customer;
-import kuznetsov.marketplace.backend.exception.ServiceException;
+import kuznetsov.marketplace.backend.domain.User;
+import kuznetsov.marketplace.backend.dto.UserAuthDto;
 import kuznetsov.marketplace.backend.repository.CustomerRepository;
 import kuznetsov.marketplace.backend.repository.UserRepository;
-import kuznetsov.marketplace.backend.service.CustomerMapper;
-import kuznetsov.marketplace.backend.service.CustomerPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,10 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 import java.util.Set;
 
-import static kuznetsov.marketplace.backend.auth.UserErrorCode.USER_ALREADY_EXISTS;
-import static kuznetsov.marketplace.backend.auth.UserErrorCode.USER_EMAIL_ALREADY_CONFIRMED;
-import static kuznetsov.marketplace.backend.auth.UserErrorCode.USER_EMAIL_NOT_CONFIRMED;
-import static kuznetsov.marketplace.backend.auth.UserErrorCode.USER_NOT_FOUND;
+import static kuznetsov.marketplace.backend.service.UserErrorCode.USER_ALREADY_EXISTS;
+import static kuznetsov.marketplace.backend.service.UserErrorCode.USER_EMAIL_ALREADY_CONFIRMED;
+import static kuznetsov.marketplace.backend.service.UserErrorCode.USER_EMAIL_NOT_CONFIRMED;
+import static kuznetsov.marketplace.backend.service.UserErrorCode.USER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

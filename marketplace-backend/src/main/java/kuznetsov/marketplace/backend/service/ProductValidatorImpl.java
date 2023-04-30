@@ -1,7 +1,6 @@
 package kuznetsov.marketplace.backend.service;
 
 import kuznetsov.marketplace.backend.dto.ProductDto;
-import kuznetsov.marketplace.backend.exception.ServiceException;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;

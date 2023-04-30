@@ -11,8 +11,6 @@ import kuznetsov.marketplace.backend.domain.UserRole;
 import kuznetsov.marketplace.backend.dto.PreorderDto;
 import kuznetsov.marketplace.backend.dto.PreorderDtoPage;
 import kuznetsov.marketplace.backend.dto.PreorderParticipantsDtoPage;
-import kuznetsov.marketplace.backend.exception.ServiceException;
-import kuznetsov.marketplace.backend.pagination.PageErrorCode;
 import kuznetsov.marketplace.backend.repository.CustomerRepository;
 import kuznetsov.marketplace.backend.repository.PreorderParticipationRepository;
 import kuznetsov.marketplace.backend.repository.ProductCategoryRepository;
@@ -29,12 +27,12 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static kuznetsov.marketplace.backend.auth.UserErrorCode.USER_HAS_NO_PERMISSION;
 import static kuznetsov.marketplace.backend.service.CustomerErrorCode.CUSTOMER_NOT_FOUND;
 import static kuznetsov.marketplace.backend.service.PreorderErrorCode.PRODUCT_NOT_PREORDERABLE;
 import static kuznetsov.marketplace.backend.service.ProductCategoryErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
 import static kuznetsov.marketplace.backend.service.ProductErrorCode.PRODUCT_NOT_FOUND;
 import static kuznetsov.marketplace.backend.service.SellerErrorCode.SELLER_NOT_FOUND;
+import static kuznetsov.marketplace.backend.service.UserErrorCode.USER_HAS_NO_PERMISSION;
 
 @Service
 @RequiredArgsConstructor

@@ -1,6 +1,5 @@
 package kuznetsov.marketplace.backend.service;
 
-import kuznetsov.marketplace.backend.proxy.EmailingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;

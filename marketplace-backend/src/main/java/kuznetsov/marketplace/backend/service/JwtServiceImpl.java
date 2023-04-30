@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.jwt;
+package kuznetsov.marketplace.backend.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

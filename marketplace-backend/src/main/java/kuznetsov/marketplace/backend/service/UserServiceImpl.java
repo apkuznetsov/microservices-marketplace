@@ -1,11 +1,12 @@
-package kuznetsov.marketplace.backend.auth;
+package kuznetsov.marketplace.backend.service;
 
-import kuznetsov.marketplace.backend.exception.ServiceException;
+import kuznetsov.marketplace.backend.domain.User;
+import kuznetsov.marketplace.backend.dto.UserDto;
 import kuznetsov.marketplace.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static kuznetsov.marketplace.backend.auth.UserErrorCode.USER_NOT_FOUND;
+import static kuznetsov.marketplace.backend.service.UserErrorCode.USER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

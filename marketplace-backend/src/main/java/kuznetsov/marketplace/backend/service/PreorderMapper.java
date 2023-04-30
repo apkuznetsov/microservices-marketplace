@@ -8,7 +8,6 @@ import kuznetsov.marketplace.backend.domain.ProductImageUrl;
 import kuznetsov.marketplace.backend.domain.Seller;
 import kuznetsov.marketplace.backend.dto.PreorderDto;
 import kuznetsov.marketplace.backend.dto.PreorderDtoPage;
-import kuznetsov.marketplace.backend.exception.ServiceException;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

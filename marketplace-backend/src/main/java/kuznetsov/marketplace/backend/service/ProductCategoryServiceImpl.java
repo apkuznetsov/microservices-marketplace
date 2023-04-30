@@ -3,8 +3,6 @@ package kuznetsov.marketplace.backend.service;
 import kuznetsov.marketplace.backend.domain.ProductCategory;
 import kuznetsov.marketplace.backend.dto.ProductCategoryDto;
 import kuznetsov.marketplace.backend.dto.ProductCategoryDtoPage;
-import kuznetsov.marketplace.backend.exception.ServiceException;
-import kuznetsov.marketplace.backend.pagination.PageErrorCode;
 import kuznetsov.marketplace.backend.repository.ProductCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -1,7 +1,6 @@
-package kuznetsov.marketplace.backend.jwt;
+package kuznetsov.marketplace.backend.service;
 
-import kuznetsov.marketplace.backend.auth.UserAuthDto;
-import kuznetsov.marketplace.backend.auth.UserAuthService;
+import kuznetsov.marketplace.backend.dto.UserAuthDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

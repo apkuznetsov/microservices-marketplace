@@ -1,7 +1,7 @@
-package kuznetsov.marketplace.backend.proxy;
+package kuznetsov.marketplace.backend.service;
 
-import kuznetsov.marketplace.backend.auth.UserAuthService;
-import kuznetsov.marketplace.backend.jwt.JwtService;
+import kuznetsov.marketplace.backend.dto.ActivationMessage;
+import kuznetsov.marketplace.backend.dto.ActivationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
