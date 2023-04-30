@@ -1,6 +1,6 @@
 package kuznetsov.marketplace.backend.repository;
 
-import kuznetsov.marketplace.backend.auth.User;
+import kuznetsov.marketplace.backend.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
