@@ -2,7 +2,7 @@ package kuznetsov.marketplace.backend.web;
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import io.jsonwebtoken.MalformedJwtException;
-import kuznetsov.marketplace.backend.exception.ServiceException;
+import kuznetsov.marketplace.backend.service.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.bind.validation.BindValidationException;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package kuznetsov.marketplace.backend.web;
 
-import kuznetsov.marketplace.backend.proxy.ActivationMessage;
-import kuznetsov.marketplace.backend.proxy.ActivationService;
+import kuznetsov.marketplace.backend.dto.ActivationMessage;
+import kuznetsov.marketplace.backend.service.ActivationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

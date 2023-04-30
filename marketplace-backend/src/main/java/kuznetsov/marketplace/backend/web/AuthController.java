@@ -1,8 +1,8 @@
 package kuznetsov.marketplace.backend.web;
 
-import kuznetsov.marketplace.backend.auth.AuthRequest;
-import kuznetsov.marketplace.backend.auth.AuthResponse;
-import kuznetsov.marketplace.backend.auth.AuthService;
+import kuznetsov.marketplace.backend.dto.AuthRequest;
+import kuznetsov.marketplace.backend.dto.AuthResponse;
+import kuznetsov.marketplace.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
