@@ -1,6 +1,5 @@
 package kuznetsov.marketplace.backend.domain;
 
-import kuznetsov.marketplace.backend.auth.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
