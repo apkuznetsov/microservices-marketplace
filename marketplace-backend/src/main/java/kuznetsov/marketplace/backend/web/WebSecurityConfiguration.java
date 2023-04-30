@@ -1,6 +1,6 @@
-package kuznetsov.marketplace.backend.security;
+package kuznetsov.marketplace.backend.web;
 
-import kuznetsov.marketplace.backend.jwt.JwtConfigurer;
+import kuznetsov.marketplace.backend.service.JwtConfigurer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,34 +16,44 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
     private final JwtConfigurer jwtConfigurer;
     private final UserDetailsService userDetailsService;
 
     @Bean
-    public AuthenticationManager beanAuthenticationManager() throws Exception {
+    public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManagerBean();
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+    protected void configure(AuthenticationManagerBuilder authConfig) throws Exception {
+        authConfig.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.cors()
+    protected void configure(HttpSecurity httpConfig) throws Exception {
+        httpConfig
+
+                .cors()
+
                 .and()
+
                 .csrf().disable()
                 .formLogin().disable()
                 .httpBasic().disable()
+
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
+
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
                 .and()
+
                 .apply(jwtConfigurer);
     }
 
