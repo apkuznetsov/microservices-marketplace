@@ -14,20 +14,21 @@ repositories {
 }
 
 ext {
-    set("springdocopenapiVersion", "1.6.13")
+    set("springdocOpenapiVersion", "1.6.13")
 }
 
 dependencies {
-    implementation "io.jsonwebtoken:jjwt:0.9.1"
 
+    implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-security"
-    implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-mail"
 
-    implementation "org.springdoc:springdoc-openapi-common:${springdocopenapiVersion}"
-    implementation "org.springdoc:springdoc-openapi-ui:${springdocopenapiVersion}"
-    implementation "org.springdoc:springdoc-openapi-security:${springdocopenapiVersion}"
+    implementation "org.springdoc:springdoc-openapi-common:${springdocOpenapiVersion}"
+    implementation "org.springdoc:springdoc-openapi-ui:${springdocOpenapiVersion}"
+    implementation "org.springdoc:springdoc-openapi-security:${springdocOpenapiVersion}"
+
+    implementation "io.jsonwebtoken:jjwt:0.9.1"
 
     compileOnly "org.projectlombok:lombok"
 
