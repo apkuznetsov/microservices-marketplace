@@ -32,6 +32,15 @@
       <name>Spring Milestones</name>
       <url>https://repo.spring.io/milestone</url>
     </repository>
+
+    <repository>
+      <id>netflix-candidates</id>
+      <name>Netflix Candidates</name>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <url>https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates</url>
+    </repository>
   </repositories>
 
   <dependencyManagement>
@@ -98,13 +107,19 @@
       <groupId>org.springframework.boot</groupId>
     </dependency>
     <dependency>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
       <artifactId>spring-cloud-starter-config</artifactId>
       <groupId>org.springframework.cloud</groupId>
     </dependency>
     <dependency>
-      <artifactId>spring-boot-configuration-processor</artifactId>
-      <groupId>org.springframework.boot</groupId>
-      <optional>true</optional>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+      <version>4.0.1</version>
     </dependency>
 
     <dependency>
