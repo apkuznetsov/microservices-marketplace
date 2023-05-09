@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <artifactId>marketplace-server</artifactId>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <version>${project.parent.version}</version>
+
+      </plugin>
+      <!-- this plugin is used to create a docker image and publish the image to docker hub-->
+      <plugin>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <configuration>
+          <buildArgs>
+            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+          <repository>${docker.image.prefix}/${project.artifactId}</repository>
+          <tag>${project.version}</tag>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>build</goal>
+              <goal>push</goal>
+            </goals>
+            <id>default</id>
+            <phase>install</phase>
+          </execution>
+        </executions>
+        <groupId>com.spotify</groupId>
+        <version>1.4.13</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-security</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-mail</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-cloud-starter-config</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <artifactId>springdoc-openapi-common</artifactId>
+      <groupId>org.springdoc</groupId>
+      <version>1.6.15</version>
+    </dependency>
+    <dependency>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <groupId>org.springdoc</groupId>
+      <version>1.6.15</version>
+    </dependency>
+    <dependency>
+      <artifactId>springdoc-openapi-security</artifactId>
+      <groupId>org.springdoc</groupId>
+      <version>1.6.15</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>jjwt</artifactId>
+      <groupId>io.jsonwebtoken</groupId>
+      <version>0.9.1</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>postgresql</artifactId>
+      <groupId>org.postgresql</groupId>
+      <version>42.5.4</version>
+    </dependency>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <scope>provided</scope>
+      <version>1.18.26</version>
+    </dependency>
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>2.7.5</version>
+      </dependency>
+
+      <dependency>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <groupId>org.springframework.cloud</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${spring-cloud.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <groupId>kuznetsov</groupId>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <packaging>jar</packaging>
+  <parent>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <relativePath/>
+    <version>2.2.4.RELEASE</version> <!-- lookup parent from repository -->
+  </parent>
+
+  <properties>
+    <docker.image.prefix>marketplace</docker.image.prefix>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
+  </repositories>
+
+  <version>0.0.1</version>
+</project>
