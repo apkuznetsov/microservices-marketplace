@@ -8,53 +8,49 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfiguration {
 
     private final PasswordEncoder passwordEncoder;
     private final JwtConfigurer jwtConfigurer;
     private final UserDetailsService userDetailsService;
 
     @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManagerBean();
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder)
+                .and()
+                .build();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder authConfig) throws Exception {
-        authConfig.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-    }
-
-    @Override
-    protected void configure(HttpSecurity httpConfig) throws Exception {
-        httpConfig
-
-                .cors()
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http.cors()
 
                 .and()
-
                 .csrf().disable()
                 .formLogin().disable()
                 .httpBasic().disable()
-
-                .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .authorizeHttpRequests()
+                .requestMatchers("/**").permitAll()
 
                 .and()
-
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
+                .apply(jwtConfigurer)
 
-                .apply(jwtConfigurer);
+                .and()
+                .build();
     }
 
 }
