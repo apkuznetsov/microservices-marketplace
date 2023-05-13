@@ -1,12 +1,11 @@
 package kuznetsov.marketplace.server.dto;
 
+import jakarta.annotation.PostConstruct;
 import kuznetsov.marketplace.server.domain.PreorderParticipationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.annotation.PostConstruct;
 
 @Data
 @NoArgsConstructor

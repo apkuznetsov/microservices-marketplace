@@ -1,5 +1,6 @@
 package kuznetsov.marketplace.server.service;
 
+import jakarta.transaction.Transactional;
 import kuznetsov.marketplace.server.domain.Product;
 import kuznetsov.marketplace.server.domain.ProductCategory;
 import kuznetsov.marketplace.server.domain.ProductImageUrl;
@@ -16,7 +17,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 

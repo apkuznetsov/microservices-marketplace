@@ -2,6 +2,7 @@ package kuznetsov.marketplace.server.web;
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import io.jsonwebtoken.MalformedJwtException;
+import jakarta.validation.ConstraintViolationException;
 import kuznetsov.marketplace.server.service.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.bind.validation.BindValidationException;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice
 @Slf4j
