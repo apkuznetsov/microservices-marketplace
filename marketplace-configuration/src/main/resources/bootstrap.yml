@@ -1,0 +1,32 @@
+server:
+  port: 8071
+
+encrypt:
+  key: secretkey
+
+spring:
+  application:
+    name: marketplace-configuration
+  profiles:
+    active: native
+  #    active: git
+  #    active: vault
+
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config
+#        git:
+#          uri: https://github.com/apkuznetsov/rest-api-marketplace.git
+#          searchPaths: marketplace-configuration
+#        vault:
+#          port: 8200
+#          host: 127.0.0.1
+#          kvVersion: 2
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
