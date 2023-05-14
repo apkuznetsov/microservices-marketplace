@@ -20,19 +20,11 @@
   </parent>
 
   <properties>
-    <docker.image.prefix>marketplace</docker.image.prefix>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-    <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+    <java.version>17</java.version>
+    <spring-cloud.version>2022.0.2</spring-cloud.version>
   </properties>
 
   <repositories>
-    <repository>
-      <id>spring-milestones</id>
-      <name>Spring Milestones</name>
-      <url>https://repo.spring.io/milestone</url>
-    </repository>
-
     <repository>
       <id>netflix-candidates</id>
       <name>Netflix Candidates</name>
@@ -45,14 +37,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <groupId>org.springframework.boot</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>2.7.5</version>
-      </dependency>
-
       <dependency>
         <artifactId>spring-cloud-dependencies</artifactId>
         <groupId>org.springframework.cloud</groupId>
@@ -67,32 +51,39 @@
     <plugins>
       <plugin>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <groupId>org.springframework.boot</groupId>
-        <version>${project.parent.version}</version>
-
-      </plugin>
-      <!-- this plugin is used to create a docker image and publish the image to docker hub-->
-      <plugin>
-        <artifactId>dockerfile-maven-plugin</artifactId>
         <configuration>
-          <buildArgs>
-            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-          </buildArgs>
-          <repository>${docker.image.prefix}/${project.artifactId}</repository>
-          <tag>${project.version}</tag>
+          <excludes>
+            <exclude>
+              <artifactId>lombok</artifactId>
+              <groupId>org.projectlombok</groupId>
+            </exclude>
+          </excludes>
         </configuration>
+        <groupId>org.springframework.boot</groupId>
+      </plugin>
+
+      <plugin>
+        <artifactId>native-maven-plugin</artifactId>
+        <groupId>org.graalvm.buildtools</groupId>
+      </plugin>
+
+      <plugin>
+        <artifactId>hibernate-enhance-maven-plugin</artifactId>
         <executions>
           <execution>
+            <configuration>
+              <enableAssociationManagement>true</enableAssociationManagement>
+              <enableDirtyTracking>true</enableDirtyTracking>
+              <enableLazyInitialization>true</enableLazyInitialization>
+            </configuration>
             <goals>
-              <goal>build</goal>
-              <goal>push</goal>
+              <goal>enhance</goal>
             </goals>
-            <id>default</id>
-            <phase>install</phase>
+            <id>enhance</id>
           </execution>
         </executions>
-        <groupId>com.spotify</groupId>
-        <version>1.4.13</version>
+        <groupId>org.hibernate.orm.tooling</groupId>
+        <version>${hibernate.version}</version>
       </plugin>
     </plugins>
   </build>
@@ -102,24 +93,27 @@
       <artifactId>spring-boot-starter-actuator</artifactId>
       <groupId>org.springframework.boot</groupId>
     </dependency>
-    <dependency>
-      <artifactId>spring-boot-autoconfigure</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
+
     <dependency>
       <artifactId>spring-boot-configuration-processor</artifactId>
       <groupId>org.springframework.boot</groupId>
       <optional>true</optional>
     </dependency>
-
+    <dependency>
+      <artifactId>spring-cloud-starter</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+    </dependency>
     <dependency>
       <artifactId>spring-cloud-starter-config</artifactId>
       <groupId>org.springframework.cloud</groupId>
     </dependency>
     <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-bootstrap</artifactId>
+    </dependency>
+    <dependency>
       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
       <groupId>org.springframework.cloud</groupId>
-      <version>4.0.1</version>
     </dependency>
 
     <dependency>
@@ -163,14 +157,12 @@
     <dependency>
       <artifactId>postgresql</artifactId>
       <groupId>org.postgresql</groupId>
-      <version>42.5.4</version>
+      <scope>runtime</scope>
     </dependency>
-
     <dependency>
       <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
-      <scope>provided</scope>
-      <version>1.18.26</version>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 
