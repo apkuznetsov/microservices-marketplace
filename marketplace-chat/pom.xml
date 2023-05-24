@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>marketplace-chat</artifactId>
+  <groupId>kuznetsov</groupId>
+  <version>0.0.1</version>
+  <name>marketplace-chat</name>
+  <description>marketplace-chat</description>
+
+  <parent>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <relativePath/>
+    <version>3.0.6</version> <!-- lookup parent from repository -->
+  </parent>
+
+  <properties>
+    <java.version>17</java.version>
+    <kotlin.version>1.7.22</kotlin.version>
+    <spring-cloud.version>2022.0.2</spring-cloud.version>
+    <docker.image.prefix>marketplace</docker.image.prefix>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
+
+    <repository>
+      <id>netflix-candidates</id>
+      <name>Netflix Candidates</name>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <url>https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates</url>
+    </repository>
+  </repositories>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <groupId>org.springframework.cloud</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${spring-cloud.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <groupId>org.springframework.boot</groupId>
+      </plugin>
+
+      <plugin>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <configuration>
+          <args>
+            <arg>-Xjsr305=strict</arg>
+          </args>
+          <compilerPlugins>
+            <plugin>spring</plugin>
+          </compilerPlugins>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <artifactId>kotlin-maven-allopen</artifactId>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <version>${kotlin.version}</version>
+          </dependency>
+        </dependencies>
+        <groupId>org.jetbrains.kotlin</groupId>
+      </plugin>
+
+      <!-- this plugin is used to create a docker image and publish the image to docker hub-->
+      <plugin>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <configuration>
+          <buildArgs>
+            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+          <repository>${docker.image.prefix}/${project.artifactId}</repository>
+          <tag>${project.version}</tag>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>build</goal>
+              <goal>push</goal>
+            </goals>
+            <id>default</id>
+            <phase>install</phase>
+          </execution>
+        </executions>
+        <groupId>com.spotify</groupId>
+        <version>1.4.13</version>
+      </plugin>
+    </plugins>
+    <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <artifactId>kotlin-reflect</artifactId>
+      <groupId>org.jetbrains.kotlin</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>kotlin-stdlib-jdk8</artifactId>
+      <groupId>org.jetbrains.kotlin</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-cloud-starter</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-cloud-starter-config</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-bootstrap</artifactId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-boot-starter-websocket</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>
