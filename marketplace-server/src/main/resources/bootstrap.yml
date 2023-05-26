@@ -7,3 +7,17 @@ spring:
   cloud:
     config:
       uri: http://localhost:8071
+
+resilience4j.circuitbreaker:
+  instances:
+    marketplace-server:
+      registerHealthIndicator: true
+      ringBufferSizeInClosedState: 5
+      ringBufferSizeInHalfOpenState: 3
+      waitDurationInOpenState: 10s
+      failureRateThreshold: 50
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+        - java.util.concurrent.RejectedExecutionException
+        - org.springframework.web.client.ResourceAccessException
