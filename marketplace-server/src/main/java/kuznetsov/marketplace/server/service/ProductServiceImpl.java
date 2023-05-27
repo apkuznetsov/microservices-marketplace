@@ -1,5 +1,6 @@
 package kuznetsov.marketplace.server.service;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.transaction.Transactional;
 import kuznetsov.marketplace.server.domain.Product;
 import kuznetsov.marketplace.server.domain.ProductCategory;
@@ -12,12 +13,15 @@ import kuznetsov.marketplace.server.repository.ProductImageUrlRepository;
 import kuznetsov.marketplace.server.repository.ProductRepository;
 import kuznetsov.marketplace.server.repository.SellerRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.stream.Collectors;
 
 import static kuznetsov.marketplace.server.service.ProductCategoryErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
@@ -25,6 +29,7 @@ import static kuznetsov.marketplace.server.service.SellerErrorCode.SELLER_NOT_FO
 import static kuznetsov.marketplace.server.service.UserErrorCode.USER_HAS_NO_PERMISSION;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
@@ -84,8 +89,11 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toProductDto(updatedProduct);
     }
 
+    @CircuitBreaker(name = "marketplace-server")
     @Override
     public ProductDto getProductById(long productId) {
+        emulateLatency();
+
         Product product = productRepo.findById(productId)
                 .orElseThrow(() -> new ServiceException(ProductErrorCode.PRODUCT_NOT_FOUND));
 
@@ -147,6 +155,21 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
 
         return imageUrlRepo.saveAllAndFlush(piuList);
+    }
+
+    private void emulateLatency() {
+        Random rand = new Random();
+        int randomNum = rand.nextInt(3) + 1;
+        if (randomNum == 3) sleep();
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(5000);
+            throw new RejectedExecutionException();
+        } catch (InterruptedException e) {
+            log.error(e.getMessage());
+        }
     }
 
 }
