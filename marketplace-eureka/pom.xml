@@ -71,10 +71,12 @@
     </dependencies>
   </dependencyManagement>
 
-  <description>Marketplace Eureka </description>
+  <description>Marketplace Eureka</description>
   <groupId>kuznetosov</groupId>
   <modelVersion>4.0.0</modelVersion>
   <name>marketplace-eureka</name>
+
+  <packaging>jar</packaging>
 
   <parent>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -98,6 +100,6 @@
       <url>https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates</url>
     </repository>
   </repositories>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
 
 </project>
