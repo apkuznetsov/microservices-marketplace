@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 import static kuznetsov.marketplace.server.service.ProductCategoryErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
@@ -89,15 +90,22 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toProductDto(updatedProduct);
     }
 
-    @CircuitBreaker(name = "marketplace-server")
+    @CircuitBreaker(name = "marketplaceServer",
+            fallbackMethod = "fallbackGetProductById")
     @Override
-    public ProductDto getProductById(long productId) {
+    public ProductDto getProductById(long productId) throws TimeoutException {
         emulateLatency();
 
         Product product = productRepo.findById(productId)
                 .orElseThrow(() -> new ServiceException(ProductErrorCode.PRODUCT_NOT_FOUND));
 
         return productMapper.toProductDto(product, product.getCategory(), product.getSeller());
+    }
+
+    private ProductDto fallbackGetProductById(long productId, Throwable t) {
+        return ProductDto.builder()
+                .description("FALLBACK PRODUCT for id = " + productId)
+                .build();
     }
 
     @Override
@@ -157,16 +165,16 @@ public class ProductServiceImpl implements ProductService {
         return imageUrlRepo.saveAllAndFlush(piuList);
     }
 
-    private void emulateLatency() {
+    private void emulateLatency() throws TimeoutException {
         Random rand = new Random();
         int randomNum = rand.nextInt(3) + 1;
         if (randomNum == 3) sleep();
     }
 
-    private void sleep() {
+    private void sleep() throws TimeoutException {
         try {
             Thread.sleep(5000);
-            throw new RejectedExecutionException();
+            throw new TimeoutException();
         } catch (InterruptedException e) {
             log.error(e.getMessage());
         }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.security.Principal;
+import java.util.concurrent.TimeoutException;
 
 @RestController
 @RequiredArgsConstructor
@@ -61,7 +62,7 @@ public class ProductController {
     }
 
     @GetMapping(path = PRODUCT_URL + "/{id}")
-    public ResponseEntity<ProductDto> getProductById(@RequestParam long id) {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable long id) throws TimeoutException {
         log.info("Someone is trying to get product with {} id.", id);
         ProductDto product = productService.getProductById(id);
 

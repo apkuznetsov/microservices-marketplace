@@ -10,7 +10,7 @@ spring:
 
 resilience4j.circuitbreaker:
   instances:
-    marketplace-server:
+    marketplaceServer:
       registerHealthIndicator: true
       ringBufferSizeInClosedState: 5
       ringBufferSizeInHalfOpenState: 3
