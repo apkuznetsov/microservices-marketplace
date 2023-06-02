@@ -21,3 +21,11 @@ resilience4j.circuitbreaker:
         - java.io.IOException
         - java.util.concurrent.RejectedExecutionException
         - org.springframework.web.client.ResourceAccessException
+
+resilience4j.retry:
+  instances:
+    retryMarketplaceServer:
+      maxRetryAttempts: 5
+      waitDuration: 10000
+      retry-exceptions:
+        - java.util.concurrent.TimeoutException
