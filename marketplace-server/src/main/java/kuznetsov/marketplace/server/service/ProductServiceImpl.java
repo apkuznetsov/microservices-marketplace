@@ -1,6 +1,8 @@
 package kuznetsov.marketplace.server.service;
 
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.transaction.Transactional;
 import kuznetsov.marketplace.server.domain.Product;
 import kuznetsov.marketplace.server.domain.ProductCategory;
@@ -94,6 +96,8 @@ public class ProductServiceImpl implements ProductService {
             fallbackMethod = "fallbackGetProductById")
     @Retry(name = "retryMarketplaceServer",
             fallbackMethod="fallbackGetProductById")
+    @Bulkhead(name= "bulkheadMarketplaceServer",  type = Bulkhead.Type.THREADPOOL,
+            fallbackMethod= "fallbackGetProductById")
     @Override
     public ProductDto getProductById(long productId) throws TimeoutException {
         emulateLatency();
