@@ -22,6 +22,13 @@ resilience4j.circuitbreaker:
         - java.util.concurrent.RejectedExecutionException
         - org.springframework.web.client.ResourceAccessException
 
+resilience4j.ratelimiter:
+  instances:
+    marketplaceServer:
+      timeoutDuration: 1000ms
+      limitRefreshPeriod: 5000
+      limitForPeriod: 5
+
 resilience4j.retry:
   instances:
     retryMarketplaceServer:
