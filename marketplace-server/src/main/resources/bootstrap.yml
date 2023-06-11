@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: marketplace-server
-  profiles:
-    active: dev
-
-  cloud:
-    config:
-      uri: http://localhost:8071
