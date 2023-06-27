@@ -1,0 +1,105 @@
+version: '2.1'
+
+services:
+
+  database:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "qwerty"
+      POSTGRES_DB: "marketplace_db"
+    networks:
+      backend:
+        aliases:
+          - "postgres"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  marketplace-configuration:
+    image: marketplace/marketplace-configuration:0.0.1
+    ports:
+       - "8071:8071"
+    environment:
+      ENCRYPT_KEY: "fje83Ki8403Iod87dne7Yjsl3THueh48jfuO9j4U2hf64Lo"
+    networks:
+      backend:
+        aliases:
+          - "marketplace-configuration"
+
+  marketplace-eureka:
+    image: marketplace/marketplace-eureka:0.0.1
+    ports:
+      - "8070:8070"
+    depends_on:
+      database:
+        condition: service_healthy
+      marketplace-configuration:
+        condition: service_started  
+    networks:
+      backend:
+        aliases:
+          - "marketplace-eureka"
+
+  marketplace-gateway:
+    image: marketplace/marketplace-gateway:0.0.1
+    ports:
+      - "8072:8072"
+    environment:
+      PROFILE: "default"
+      SERVER_PORT: "8072"
+      MARKETPLACE_CONFIGURATION_URI: "http://marketplace-configuration:8071"
+      MARKETPLACE_EUREKA_URI: "http://marketplace-eureka:8070/eureka/"
+      MARKETPLACE_CONFIGURATION_PORT: "8071"
+      MARKETPLACE_EUREKA_PORT: "8070"
+    depends_on:
+      database:
+        condition: service_healthy
+      marketplace-configuration:
+        condition: service_started
+      marketplace-eureka:
+        condition: service_started
+    networks:
+      backend:
+        aliases:
+          - "marketplace-gateway"
+
+  marketplace-backend:
+    image: marketplace/marketplace-backend:0.0.1
+    environment:
+      PROFILE: "dev"
+      MARKETPLACE_CONFIGURATION_URI: "http://marketplace-configuration:8071"
+      MARKETPLACE_CONFIGURATION_PORT:   "8071"
+      DATABASE_PORT: "5432"
+      ENCRYPT_KEY: "IMSYMMETRIC"
+    depends_on:
+      database:
+        condition: service_healthy
+      marketplace-configuration:
+        condition: service_started
+      marketplace-eureka:
+        condition: service_started
+    ports:
+      - "8081:8081"
+    networks:
+      - backend
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+        KEYCLOAK_ADMIN: admin
+        KEYCLOAK_ADMIN_PASSWORD: qwerty
+    ports:
+      - "8080:8080"
+    command: start-dev
+    networks:
+      backend:
+        aliases:
+          - "keycloak"
+
+networks:
+  backend:
+    driver: bridge
