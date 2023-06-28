@@ -3,84 +3,89 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <artifactId>marketplace-configuration</artifactId>
-
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <groupId>org.springframework.boot</groupId>
-      </plugin>
-
-      <!-- This plugin is used to create a docker image and publish the image to docker hub-->
-      <plugin>
-        <artifactId>dockerfile-maven-plugin</artifactId>
-        <configuration>
-          <buildArgs>
-            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-          </buildArgs>
-          <repository>${docker.image.prefix}/${project.artifactId}</repository>
-          <tag>${project.version}</tag>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>build</goal>
-              <goal>push</goal>
-            </goals>
-            <id>default</id>
-            <phase>install</phase>
-          </execution>
-        </executions>
-        <groupId>com.spotify</groupId>
-        <version>1.4.13</version>
-      </plugin>
-    </plugins>
-  </build>
-
-  <dependencies>
-    <dependency>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
-
-    <dependency>
-      <artifactId>spring-cloud-config-server</artifactId>
-      <groupId>org.springframework.cloud</groupId>
-    </dependency>
-  </dependencies>
-  
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <groupId>org.springframework.cloud</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>${spring-cloud.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-  <description>market-configuration</description>
-  <groupId>kuznetsov</groupId>
-
   <modelVersion>4.0.0</modelVersion>
-  <name>market-configuration</name>
+
+  <groupId>kuznetsov</groupId>
+  <artifactId>marketplace-configuration</artifactId>
+  <version>0.0.1</version>
   <packaging>jar</packaging>
+
+  <name>marketplace-configuration</name>
+  <description>marketplace-configuration</description>
 
   <parent>
     <artifactId>spring-boot-starter-parent</artifactId>
     <groupId>org.springframework.boot</groupId>
-    <relativePath/>
-    <version>2.2.4.RELEASE</version> <!-- lookup parent from repository -->
+    <version>3.1.0</version>
+    <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
   <properties>
+    <java.version>17</java.version>
+    <spring-cloud.version>2022.0.2</spring-cloud.version>
     <docker.image.prefix>marketplace</docker.image.prefix>
-    <java.version>11</java.version>
-    <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
   </properties>
 
-  <version>0.0.1</version>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <!-- This plugin is used to create a docker image and publish the image to docker hub-->
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>1.4.13</version>
+        <configuration>
+          <repository>${docker.image.prefix}/${project.artifactId}</repository>
+          <tag>${project.version}</tag>
+          <buildArgs>
+            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default</id>
+            <phase>install</phase>
+            <goals>
+              <goal>build</goal>
+              <goal>push</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-bootstrap</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-config-server</artifactId>
+    </dependency>
+  </dependencies>
 
 </project>

@@ -10,7 +10,7 @@ spring:
 
 eureka:
   instance:
-    hostname: marketplace-eureka
+    hostname: localhost
   server:
     waitTimeInMsWhenSyncEmpty: 5
   client:
