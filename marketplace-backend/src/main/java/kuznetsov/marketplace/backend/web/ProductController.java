@@ -1,6 +1,5 @@
 package kuznetsov.marketplace.backend.web;
 
-import jakarta.annotation.security.RolesAllowed;
 import kuznetsov.marketplace.backend.dto.ProductDto;
 import kuznetsov.marketplace.backend.dto.ProductDtoPage;
 import kuznetsov.marketplace.backend.service.ProductService;
@@ -62,7 +61,6 @@ public class ProductController {
         return ResponseEntity.ok(updatedProduct);
     }
 
-    @RolesAllowed({ "ADMIN", "USER" })
     @GetMapping(path = PRODUCT_URL + "/{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable long id) throws TimeoutException {
         log.info("Someone is trying to get product with {} id.", id);
