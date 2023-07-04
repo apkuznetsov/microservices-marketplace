@@ -1,19 +1,26 @@
 spring:
   application:
     name: marketplace-backend
+
   cloud:
     config:
       uri: http://localhost:8071
 
-keycloak:
-  realm: marketplace-realm
-  auth-server-url: http://keycloak:8080/auth
-  ssl-required: external
-  resource: marketplace
-  credentials:
-    secret: 5988f899-a5bf-4f76-b15f-f1cd0d2c81ba
-  use-resource-role-mappings: true
-  bearer-only: true
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: marketplace-client-id
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/marketplace-realm
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/marketplace-realm
 
 resilience4j.circuitbreaker:
   instances:
