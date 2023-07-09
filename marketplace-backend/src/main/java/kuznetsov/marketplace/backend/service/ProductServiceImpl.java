@@ -94,9 +94,9 @@ public class ProductServiceImpl implements ProductService {
     @CircuitBreaker(name = "marketplaceServer",
             fallbackMethod = "fallbackGetProductById")
     @Retry(name = "retryMarketplaceServer",
-            fallbackMethod="fallbackGetProductById")
-    @Bulkhead(name= "bulkheadMarketplaceServer",  type = Bulkhead.Type.THREADPOOL,
-            fallbackMethod= "fallbackGetProductById")
+            fallbackMethod = "fallbackGetProductById")
+    @Bulkhead(name = "bulkheadMarketplaceServer", type = Bulkhead.Type.THREADPOOL,
+            fallbackMethod = "fallbackGetProductById")
     @Override
     public ProductDto getProductById(long productId) throws TimeoutException {
         emulateLatency();
