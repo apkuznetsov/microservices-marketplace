@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+@Profile("!keycloak")
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -33,7 +34,6 @@ public class WebSecurityConfigurationDefault {
                 .build();
     }
 
-    @Profile("!keycloak")
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.cors()
