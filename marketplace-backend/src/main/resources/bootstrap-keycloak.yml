@@ -4,7 +4,24 @@ spring:
 
   cloud:
     config:
-      uri: http://marketplace-configuration:8071
+      uri: http://localhost:8071
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: marketplace-client-id
+            client-secret: AVzlxk6gpLPkGoBw955oic8Hoo7umWAq
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/marketplace-realm
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/marketplace-realm
 
 resilience4j.circuitbreaker:
   instances:
