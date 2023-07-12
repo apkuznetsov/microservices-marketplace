@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
@@ -27,16 +29,20 @@ public class WebSecurityConfigurationKeycloak {
     }
 
     @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                .build();
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.cors()
-
-                .and()
-                .csrf().disable()
-                .formLogin().disable()
-                .httpBasic().disable()
-
+        return http
                 .authorizeHttpRequests()
-                .requestMatchers("/**").permitAll()
+                .requestMatchers("/api/v1/products/**")
+                .hasRole("USER")
+
+                .anyRequest()
+                .permitAll()
 
                 .and()
                 .oauth2Login()
