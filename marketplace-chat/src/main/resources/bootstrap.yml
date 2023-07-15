@@ -6,4 +6,4 @@ spring:
 
   cloud:
     config:
-      uri: http://localhost:8071
+      uri: http://marketplace-configuration:8071

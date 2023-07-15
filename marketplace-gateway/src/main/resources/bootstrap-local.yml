@@ -1,0 +1,12 @@
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    kuznetsov.marketplace: DEBUG
+
+spring:
+  application:
+    name: marketplace-gateway
+  cloud:
+    config:
+      uri: http://localhost:8071

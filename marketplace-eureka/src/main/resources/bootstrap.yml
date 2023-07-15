@@ -1,10 +1,6 @@
 spring:
   application:
     name: marketplace-eureka
-
   cloud:
     config:
-      uri: http://localhost:8071
-    loadbalancer:
-      ribbon:
-        enabled: false
+      uri: http://marketplace-configuration:8071

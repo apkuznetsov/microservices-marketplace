@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: marketplace-backend
+
+  cloud:
+    config:
+      uri: http://localhost:8071
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: marketplace-client-id
+            client-secret: AVzlxk6gpLPkGoBw955oic8Hoo7umWAq
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/marketplace-realm
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/marketplace-realm
+
+resilience4j.circuitbreaker:
+  instances:
+    marketplaceServer:
+      registerHealthIndicator: true
+      ringBufferSizeInClosedState: 5
+      ringBufferSizeInHalfOpenState: 3
+      waitDurationInOpenState: 10s
+      failureRateThreshold: 50
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+        - java.util.concurrent.RejectedExecutionException
+        - org.springframework.web.client.ResourceAccessException
+
+resilience4j.ratelimiter:
+  instances:
+    marketplaceServer:
+      timeoutDuration: 1000ms
+      limitRefreshPeriod: 5000
+      limitForPeriod: 5
+
+resilience4j.retry:
+  instances:
+    retryMarketplaceServer:
+      maxRetryAttempts: 5
+      waitDuration: 10000
+      retry-exceptions:
+        - java.util.concurrent.TimeoutException
+
+resilience4j.bulkhead:
+  instances:
+    bulkheadMarketplaceServer:
+      maxWaitDuration: 10ms
+      maxConcurrentCalls: 20
+
+resilience4j.thread-pool-bulkhead:
+  instances:
+    bulkheadMarketplaceServer:
+      maxThreadPoolSize: 1
+      coreThreadPoolSize: 1
+      queueCapacity: 1
+      keepAliveDuration: 20ms

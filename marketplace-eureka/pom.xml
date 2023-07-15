@@ -3,90 +3,73 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <artifactId>marketplace-eureka</artifactId>
-
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <groupId>org.springframework.boot</groupId>
-      </plugin>
-    </plugins>
-  </build>
-
-  <dependencies>
-    <dependency>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-cloud-starter-config</artifactId>
-      <groupId>org.springframework.cloud</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-cloud-starter-bootstrap</artifactId>
-      <groupId>org.springframework.cloud</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-      <exclusions>
-        <exclusion>
-          <artifactId>spring-cloud-starter-ribbon</artifactId>
-          <groupId>org.springframework.cloud</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ribbon-eureka</artifactId>
-          <groupId>com.netflix.ribbon</groupId>
-        </exclusion>
-      </exclusions>
-      <groupId>org.springframework.cloud</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-      <groupId>org.springframework.cloud</groupId>
-    </dependency>
-
-    <dependency>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <exclusions>
-        <exclusion>
-          <artifactId>junit-vintage-engine</artifactId>
-          <groupId>org.junit.vintage</groupId>
-        </exclusion>
-      </exclusions>
-      <groupId>org.springframework.boot</groupId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <groupId>org.springframework.cloud</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>${spring-cloud.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <description>Marketplace Eureka </description>
-  <groupId>kuznetosov</groupId>
   <modelVersion>4.0.0</modelVersion>
+
+  <groupId>kuznetosov</groupId>
+  <artifactId>marketplace-eureka</artifactId>
+  <version>0.0.1</version>
+  <packaging>jar</packaging>
+
   <name>marketplace-eureka</name>
+  <description>marketplace-eureka</description>
 
   <parent>
     <artifactId>spring-boot-starter-parent</artifactId>
     <groupId>org.springframework.boot</groupId>
-    <relativePath/>
-    <version>3.0.6</version> <!-- lookup parent from repository -->
+    <version>3.1.0</version>
+    <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
   <properties>
     <java.version>17</java.version>
     <spring-cloud.version>2022.0.2</spring-cloud.version>
+    <docker.image.prefix>marketplace</docker.image.prefix>
   </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <!-- This plugin is used to create a docker image and publish the image to docker hub-->
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>1.4.13</version>
+        <configuration>
+          <repository>${docker.image.prefix}/${project.artifactId}</repository>
+          <tag>${project.version}</tag>
+          <buildArgs>
+            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default</id>
+            <phase>install</phase>
+            <goals>
+              <goal>build</goal>
+              <goal>push</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <repositories>
     <repository>
@@ -98,6 +81,40 @@
       <url>https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates</url>
     </repository>
   </repositories>
-  <version>0.0.1-SNAPSHOT</version>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-config</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-bootstrap</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-starter-ribbon</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.netflix.ribbon</groupId>
+          <artifactId>ribbon-eureka</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+    </dependency>
+  </dependencies>
 
 </project>
