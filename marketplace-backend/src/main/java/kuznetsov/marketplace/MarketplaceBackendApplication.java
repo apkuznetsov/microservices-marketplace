@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend;
+package kuznetsov.marketplace;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
