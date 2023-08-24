@@ -1,10 +1,10 @@
-package kuznetsov.marketplace.backend.domain;
+package kuznetsov.marketplace.auth;
 
 import org.springframework.security.core.GrantedAuthority;
 
 public enum UserRole implements GrantedAuthority {
 
-    ADMIN, MODERATOR, SELLER, CUSTOMER;
+    SELLER, CUSTOMER;
 
     @Override
     public String getAuthority() {

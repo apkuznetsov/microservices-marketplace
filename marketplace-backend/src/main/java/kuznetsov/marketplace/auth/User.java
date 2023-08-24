@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.domain;
+package kuznetsov.marketplace.auth;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.service;
+package kuznetsov.marketplace.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class SecurityConfiguration {
+public class AuthProviderConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {

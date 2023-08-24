@@ -1,8 +1,8 @@
 package kuznetsov.marketplace.backend.service;
 
-import kuznetsov.marketplace.backend.domain.User;
+import kuznetsov.marketplace.auth.User;
+import kuznetsov.marketplace.auth.UserRepo;
 import kuznetsov.marketplace.backend.dto.UserDto;
-import kuznetsov.marketplace.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
-    private final UserRepository userRepo;
+    private final UserRepo userRepo;
 
     public UserDto getUserByEmail(String userEmail) {
         User user = userRepo.findByEmail(userEmail)

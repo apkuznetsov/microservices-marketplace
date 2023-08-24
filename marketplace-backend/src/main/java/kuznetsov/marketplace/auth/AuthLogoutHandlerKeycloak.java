@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.web;
+package kuznetsov.marketplace.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class WebSecurityLogoutHandlerKeycloak implements LogoutHandler {
+public class AuthLogoutHandlerKeycloak implements LogoutHandler {
 
     private final RestTemplate restTemplate;
 

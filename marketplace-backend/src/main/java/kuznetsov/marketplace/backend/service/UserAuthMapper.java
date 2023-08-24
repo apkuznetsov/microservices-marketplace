@@ -1,7 +1,7 @@
 package kuznetsov.marketplace.backend.service;
 
-import kuznetsov.marketplace.backend.domain.User;
-import kuznetsov.marketplace.backend.domain.UserRole;
+import kuznetsov.marketplace.auth.User;
+import kuznetsov.marketplace.auth.UserRole;
 import kuznetsov.marketplace.backend.dto.UserAuthDto;
 
 public interface UserAuthMapper {

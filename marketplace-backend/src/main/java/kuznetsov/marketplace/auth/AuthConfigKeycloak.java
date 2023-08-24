@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.web;
+package kuznetsov.marketplace.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -19,9 +19,9 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 @EnableWebSecurity
 @RequiredArgsConstructor
 @SuppressWarnings({"removal"})
-public class WebSecurityConfigurationKeycloak {
+public class AuthConfigKeycloak {
 
-    private final WebSecurityLogoutHandlerKeycloak keycloakLogoutHandler;
+    private final AuthLogoutHandlerKeycloak keycloakLogoutHandler;
 
     @Bean
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {

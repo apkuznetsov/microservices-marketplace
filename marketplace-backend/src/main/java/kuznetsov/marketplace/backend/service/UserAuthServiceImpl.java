@@ -1,56 +1,33 @@
 package kuznetsov.marketplace.backend.service;
 
+import kuznetsov.marketplace.auth.User;
+import kuznetsov.marketplace.auth.UserRepo;
 import kuznetsov.marketplace.backend.domain.Customer;
-import kuznetsov.marketplace.backend.domain.User;
 import kuznetsov.marketplace.backend.dto.UserAuthDto;
 import kuznetsov.marketplace.backend.repository.CustomerRepository;
-import kuznetsov.marketplace.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-import java.util.Set;
 
 import static kuznetsov.marketplace.backend.service.UserErrorCode.USER_ALREADY_EXISTS;
 import static kuznetsov.marketplace.backend.service.UserErrorCode.USER_EMAIL_ALREADY_CONFIRMED;
-import static kuznetsov.marketplace.backend.service.UserErrorCode.USER_EMAIL_NOT_CONFIRMED;
 import static kuznetsov.marketplace.backend.service.UserErrorCode.USER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
-public class UserAuthServiceImpl implements UserAuthService, UserDetailsService {
+public class UserAuthServiceImpl implements UserAuthService {
 
     private final UserAuthMapper userAuthMapper;
     private final CustomerMapper customerMapper;
     private final CustomerPublisher customerPublisher;
 
-    private final UserRepository userRepo;
+    private final UserRepo userRepo;
     private final CustomerRepository customerRepo;
 
     private final PasswordEncoder passwordEncoder;
-
-    @Override
-    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        User user = userRepo.findByEmail(userEmail)
-                .orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
-        if (!user.isEmailConfirmed()) {
-            throw new ServiceException(USER_EMAIL_NOT_CONFIRMED);
-        }
-
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                Set.of(
-                        new SimpleGrantedAuthority(user.getRole().toString())
-                )
-        );
-    }
 
     @Override
     @Transactional(readOnly = true)

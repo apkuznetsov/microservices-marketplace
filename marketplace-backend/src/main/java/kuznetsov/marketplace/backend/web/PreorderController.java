@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import kuznetsov.marketplace.backend.domain.UserRole;
+import kuznetsov.marketplace.auth.UserRole;
 import kuznetsov.marketplace.backend.dto.PreorderDto;
 import kuznetsov.marketplace.backend.dto.PreorderDtoPage;
 import kuznetsov.marketplace.backend.dto.PreorderParticipantsDtoPage;

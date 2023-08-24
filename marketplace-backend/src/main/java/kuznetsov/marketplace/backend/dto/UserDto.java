@@ -1,6 +1,6 @@
 package kuznetsov.marketplace.backend.dto;
 
-import kuznetsov.marketplace.backend.domain.UserRole;
+import kuznetsov.marketplace.auth.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

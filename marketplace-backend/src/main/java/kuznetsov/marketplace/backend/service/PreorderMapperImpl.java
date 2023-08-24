@@ -1,11 +1,11 @@
 package kuznetsov.marketplace.backend.service;
 
+import kuznetsov.marketplace.auth.UserRole;
 import kuznetsov.marketplace.backend.domain.Customer;
 import kuznetsov.marketplace.backend.domain.PreorderParticipation;
 import kuznetsov.marketplace.backend.domain.PreorderParticipationStatus;
 import kuznetsov.marketplace.backend.domain.Product;
 import kuznetsov.marketplace.backend.domain.Seller;
-import kuznetsov.marketplace.backend.domain.UserRole;
 import kuznetsov.marketplace.backend.dto.PreorderDto;
 import kuznetsov.marketplace.backend.dto.PreorderDtoPage;
 import kuznetsov.marketplace.backend.dto.UserDto;
