@@ -1,6 +1,5 @@
-package kuznetsov.marketplace.backend.dto;
+package kuznetsov.marketplace.backend.auth.dto;
 
-import kuznetsov.marketplace.auth.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,12 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserDto {
-
-    private Long id;
+public class OtpResponse {
 
     private String email;
 
-    private UserRole role;
+    private String code;
 
 }

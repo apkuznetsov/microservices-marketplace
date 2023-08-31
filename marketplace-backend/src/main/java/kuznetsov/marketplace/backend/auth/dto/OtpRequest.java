@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.dto;
+package kuznetsov.marketplace.backend.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,14 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserAuthDto {
-
-    private Long id;
+public class OtpRequest {
 
     private String email;
 
-    private Boolean isBanned;
-
-    private Boolean isEmailConfirmed;
+    private String code;
 
 }
