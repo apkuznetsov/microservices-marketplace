@@ -1,9 +1,10 @@
-package kuznetsov.marketplace.backend.service;
+package kuznetsov.marketplace.backend.auth.service;
 
-import kuznetsov.marketplace.backend.dto.AuthRequest;
-import kuznetsov.marketplace.backend.dto.AuthResponse;
+import kuznetsov.marketplace.backend.auth.dto.AuthRequest;
+import kuznetsov.marketplace.backend.auth.dto.JwtResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -12,36 +13,34 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements AuthService {
+public class JwtAuthServiceImpl implements JwtAuthService {
 
     private final AuthenticationManager authenticationManager;
 
     private final JwtService jwtService;
 
     @Override
-    public AuthResponse login(AuthRequest authRequest) {
-        Authentication authentication = authenticationManager.authenticate(
+    public JwtResponse login(AuthRequest authRequest) {
+        Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authRequest.getEmail(), authRequest.getPassword())
         );
 
-        String userEmail = authRequest.getEmail();
-        String userRole = Optional.of(
-                        authentication
-                                .getAuthorities()
+        String email = authRequest.getEmail();
+        String role = Optional.of(
+                        auth.getAuthorities()
                                 .stream()
                                 .findFirst()
                 ).get()
-                .orElseThrow(() -> new ServiceException(AuthErrorCode.AUTH_ERROR))
+                .orElseThrow(() -> new BadCredentialsException("bad credentials exception"))
                 .toString();
+        String token = jwtService.generateAccessToken(
+                email, role);
 
-        String accessToken = jwtService.generateAccessToken(
-                userEmail, userRole);
-
-        return AuthResponse.builder()
+        return JwtResponse.builder()
                 .type("Bearer")
-                .accessToken(accessToken)
-                .role(userRole)
+                .accessToken(token)
+                .role(role)
                 .build();
     }
 
