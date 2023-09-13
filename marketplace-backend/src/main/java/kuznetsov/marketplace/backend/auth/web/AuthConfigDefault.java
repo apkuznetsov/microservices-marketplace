@@ -1,6 +1,6 @@
-package kuznetsov.marketplace.auth;
+package kuznetsov.marketplace.backend.auth.web;
 
-import kuznetsov.marketplace.backend.service.JwtConfigurer;
+import kuznetsov.marketplace.backend.auth.service.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Profile("!keycloak")
 @Configuration
@@ -17,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @SuppressWarnings({"removal"})
 public class AuthConfigDefault {
 
-    private final JwtConfigurer jwtConfigurer;
+    private final JwtFilter jwtFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -36,9 +37,8 @@ public class AuthConfigDefault {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
-                .apply(jwtConfigurer)
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 
-                .and()
                 .build();
     }
 
