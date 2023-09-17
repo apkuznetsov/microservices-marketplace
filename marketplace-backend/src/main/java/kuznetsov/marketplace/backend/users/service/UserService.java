@@ -13,5 +13,5 @@ public interface UserService {
     void confirmEmail(@NotNull String email);
 
     boolean doesUserPasswordMatch(@NotNull String email, @NotNull String passwordNotHashed);
-    
+
 }
