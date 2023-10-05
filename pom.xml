@@ -14,6 +14,7 @@
   <description>marketplace-microservices</description>
 
   <modules>
+    <module>marketplace-auth</module>
     <module>marketplace-configuration</module>
     <module>marketplace-eureka</module>
     <module>marketplace-gateway</module>
