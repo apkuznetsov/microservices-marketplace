@@ -38,4 +38,16 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                 .redirectUris("http://localhost:9090/home");
     }
 
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
+                new ClassPathResource(privateKey),
+                password.toCharArray()
+        );
+
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setKeyPair(keyStoreKeyFactory.getKeyPair(alias));
+
+        return converter;
+    }
 }
