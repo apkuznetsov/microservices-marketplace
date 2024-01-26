@@ -22,7 +22,7 @@ import java.util.List;
 @Configuration
 @EnableAuthorizationServer
 @RequiredArgsConstructor
-public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
+public class ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private final AuthenticationManager authenticationManager;
 
@@ -47,7 +47,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
 
         List<TokenEnhancer> tokenEnhancers = List.of(
-                new CustomTokenEnhancer(),
+                new TokenEnhancerCustom(),
                 jwtAccessTokenConverter()
         );
         tokenEnhancerChain.setTokenEnhancers(tokenEnhancers);
