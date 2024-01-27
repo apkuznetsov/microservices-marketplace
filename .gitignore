@@ -6,3 +6,5 @@ build/
 */target/
 
 *.iml
+
+deprecated/marketplace-eureka/target/*
