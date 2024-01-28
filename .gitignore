@@ -7,4 +7,4 @@ build/
 
 *.iml
 
-deprecated/marketplace-eureka/target/*
+etc/marketplace-eureka/target/*
