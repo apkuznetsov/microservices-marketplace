@@ -14,8 +14,6 @@
   <description>marketplace-microservices</description>
 
   <modules>
-    <module>marketplace-oauth-server</module>
-    <module>marketplace-oauth-resource</module>
     <module>marketplace-oauth-client</module>
     <module>marketplace-auth</module>
     <module>marketplace-configuration</module>
