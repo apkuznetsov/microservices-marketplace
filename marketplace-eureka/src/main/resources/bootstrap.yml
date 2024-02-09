@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: marketplace-eureka
-  cloud:
-    config:
-      uri: http://marketplace-configuration:8071

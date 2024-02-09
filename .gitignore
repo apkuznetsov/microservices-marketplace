@@ -6,3 +6,5 @@ build/
 */target/
 
 *.iml
+
+etc/marketplace-eureka/target/*
