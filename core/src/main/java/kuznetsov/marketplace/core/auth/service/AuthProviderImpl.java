@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.backend.auth.service;
+package kuznetsov.marketplace.core.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AuthProviderImpl implements AuthenticationProvider {
 
-    private PasswordEncoder passwordEncoder;
-    private UserDetailsService userService;
+    private final PasswordEncoder passwordEncoder;
+    private final UserDetailsService userService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
