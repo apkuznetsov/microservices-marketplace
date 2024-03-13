@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +23,17 @@ public class ImageFilterImpl implements ImageFilter {
     @Override
     public MultipartFile filterUsingBmp(MultipartFile inputFile) {
         return null;
+    }
+
+    private byte @NotNull [] toSpecifiedFormatFromBmpBytes(byte @NotNull [] bmpBytes, @NotNull String format) throws IOException {
+        try (ByteArrayInputStream bais = new ByteArrayInputStream(bmpBytes);
+             ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+
+            BufferedImage readImage = ImageIO.read(bais);
+            ImageIO.write(readImage, format, baos);
+
+            return baos.toByteArray();
+        }
     }
 
     private @NotNull ByteArrayOutputStream toBmp(@NotNull InputStream inStream) throws IOException {
