@@ -1,6 +1,7 @@
 package kuznetsov.gists.imagefilter;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
@@ -25,11 +26,23 @@ import java.util.Optional;
 @Slf4j
 public class ImageFilterImpl implements ImageFilter {
 
+    private final long JPEG_THRESHOLD_SIZE = 3_000_000L;
     private final float JPEG_COMPRESSION_QUALITY = 0.75f;
 
     @Override
-    public MultipartFile filterUsingBmp(MultipartFile inputFile) {
-        return null;
+    @SneakyThrows
+    public @NotNull MultipartFile filterUsingBmp(@NotNull MultipartFile mfile) {
+        String format = extractFormat(mfile);
+        long size = mfile.getSize();
+        boolean isJpegForCompression = ("jpg".equalsIgnoreCase(format) || "jpeg".equalsIgnoreCase(format))
+                && (size >= JPEG_THRESHOLD_SIZE);
+
+        byte[] bmpBytes = toBmp(mfile.getInputStream()).toByteArray();
+        byte[] outBytes = isJpegForCompression
+                ? toCompressedJpegFromBmpBytes(bmpBytes, format)
+                : toSpecifiedFormatFromBmpBytes(bmpBytes, format);
+
+        return new MultipartFileImpl(outBytes, format, mfile.getOriginalFilename(), mfile.getName());
     }
 
     private byte @NotNull [] toCompressedJpegFromBmpBytes(byte @NotNull [] bmpBytes, @NotNull String format) throws IOException {
