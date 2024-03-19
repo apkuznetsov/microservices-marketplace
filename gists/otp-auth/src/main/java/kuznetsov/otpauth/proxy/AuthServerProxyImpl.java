@@ -1,6 +1,6 @@
-package kuznetsov.marketplace.auth.proxy;
+package kuznetsov.otpauth.proxy;
 
-import kuznetsov.marketplace.auth.dto.User;
+import kuznetsov.otpauth.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;

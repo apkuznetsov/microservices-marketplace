@@ -1,4 +1,4 @@
-package kuznetsov.gists.otpauth;
+package kuznetsov.otpauth;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

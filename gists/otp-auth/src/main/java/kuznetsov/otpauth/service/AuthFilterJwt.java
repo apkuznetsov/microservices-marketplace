@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.auth.service;
+package kuznetsov.otpauth.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -7,7 +7,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import kuznetsov.marketplace.auth.domain.AuthUsernamePassword;
+import kuznetsov.otpauth.domain.AuthUsernamePassword;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;

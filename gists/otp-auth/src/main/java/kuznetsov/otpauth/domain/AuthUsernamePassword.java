@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.auth.domain;
+package kuznetsov.otpauth.domain;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

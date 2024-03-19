@@ -1,7 +1,7 @@
-package kuznetsov.marketplace.auth.service;
+package kuznetsov.otpauth.service;
 
-import kuznetsov.marketplace.auth.domain.AuthUsernamePassword;
-import kuznetsov.marketplace.auth.proxy.AuthServerProxy;
+import kuznetsov.otpauth.domain.AuthUsernamePassword;
+import kuznetsov.otpauth.proxy.AuthServerProxy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

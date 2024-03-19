@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.auth.dto;
+package kuznetsov.otpauth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

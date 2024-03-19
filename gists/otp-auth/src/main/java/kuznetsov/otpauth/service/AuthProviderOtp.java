@@ -1,7 +1,7 @@
-package kuznetsov.marketplace.auth.service;
+package kuznetsov.otpauth.service;
 
-import kuznetsov.marketplace.auth.domain.AuthOtp;
-import kuznetsov.marketplace.auth.proxy.AuthServerProxy;
+import kuznetsov.otpauth.domain.AuthOtp;
+import kuznetsov.otpauth.proxy.AuthServerProxy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
