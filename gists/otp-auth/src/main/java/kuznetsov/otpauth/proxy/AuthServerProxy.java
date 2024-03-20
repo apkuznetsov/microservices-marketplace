@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.auth.proxy;
+package kuznetsov.otpauth.proxy;
 
 import org.jetbrains.annotations.NotNull;
 
