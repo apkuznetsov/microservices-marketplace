@@ -1,0 +1,20 @@
+server:
+  port: 8888
+  tomcat:
+    connection-timeout: 2s
+    keep-alive-timeout: 16s
+    threads:
+      max: 50
+      min-spare: 5
+
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/apkuznetsov/microservices-marketplace-config
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
