@@ -7,4 +7,4 @@ build/
 
 *.iml
 
-etc/marketplace-eureka/target/*
+marketplace-core/docker/*.jar
