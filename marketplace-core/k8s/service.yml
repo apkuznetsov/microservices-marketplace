@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: marketplace-core
+  labels:
+    app: marketplace-core
+spec:
+  type: ClusterIP
+  selector:
+    app: marketplace-core
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9001
