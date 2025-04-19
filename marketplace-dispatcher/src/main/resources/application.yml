@@ -1,0 +1,10 @@
+server:
+  port: 9003
+
+spring:
+  application:
+    name: marketplace-dispatcher
+
+  cloud:
+    function:
+      definition: pack|label
