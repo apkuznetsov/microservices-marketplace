@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+ name: marketplace-config
+ labels:
+   app: marketplace-config
+
+data:
+ application.yml: |
+  marketplace:
+    greeting: Welcome to Marketplace from Kubernetes!
+  spring:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/marketplace_db
+    security:
+      oauth2:
+        resourceserver:
+          jwt:
+            issuer-uri: http://localhost:8082/realms/marketplace
