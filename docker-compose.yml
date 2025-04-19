@@ -2,8 +2,21 @@ version: '2.1'
 
 services:
 
-  database:
-    image: postgres:latest
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.6
+    ports:
+      - "9990:8080"
+      - "9991:8443"
+    environment:
+      KEYCLOAK_ADMIN: "admin"
+      KEYCLOAK_ADMIN_PASSWORD: "12345"
+    command:
+      - start-dev
+    networks:
+      - backend
+
+  postgres:
+    image: postgres:17.4
     ports:
       - "5432:5432"
     environment:
@@ -11,29 +24,12 @@ services:
       POSTGRES_PASSWORD: "12345"
       POSTGRES_DB: "postgres"
     networks:
-      backend:
-        aliases:
-          - "postgres"
+      - backend
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 10s
       timeout: 5s
       retries: 5
-
-  marketplace-core:
-    image: marketplace/marketplace-core:0.1.0
-    environment:
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/marketplace_db"
-      SPRING_DATASOURCE_USERNAME: "admin"
-      SPRING_DATASOURCE_PASSWORD: "12345"
-      PROFILE: "dev"
-    depends_on:
-      database:
-        condition: service_healthy
-    ports:
-      - "8081:8081"
-    networks:
-      - backend
 
 networks:
   backend:
