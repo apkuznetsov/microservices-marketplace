@@ -4,7 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "kuznetsov.marketplace.core",
+        "kuznetsov.marketplace.settings"})
 @RefreshScope
 public class App {
 

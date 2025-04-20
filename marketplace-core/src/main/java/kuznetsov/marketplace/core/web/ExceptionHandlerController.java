@@ -2,6 +2,7 @@ package kuznetsov.marketplace.core.web;
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import io.jsonwebtoken.MalformedJwtException;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.ConstraintViolationException;
 import kuznetsov.marketplace.core.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+@Hidden
 @ControllerAdvice
 @Slf4j
 public class ExceptionHandlerController {

@@ -11,9 +11,9 @@
     <packaging>jar</packaging>
 
     <parent>
-        <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
-        <version>3.1.0</version>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -177,6 +177,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
@@ -199,6 +204,12 @@
             <artifactId>lombok</artifactId>
             <version>1.18.28</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>kuznetsov</groupId>
+            <artifactId>marketplace-settings-starter</artifactId>
+            <version>0.1.0</version>
         </dependency>
     </dependencies>
 
