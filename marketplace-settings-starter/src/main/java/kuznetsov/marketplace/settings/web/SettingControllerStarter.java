@@ -21,9 +21,9 @@ public class SettingControllerStarter {
 
     private final SettingServiceStarter settingService;
 
-    @GetMapping(path = SETTING_STARTER_URL + "/{id}")
-    public List<SettingDto> getSettings(@PathVariable Long id) {
-        log.info("Someone is trying to get setting with {} id.", id);
+    @GetMapping(path = SETTING_STARTER_URL)
+    public List<SettingDto> getSettings() {
+        log.info("Someone is trying to get all settings.");
         return settingService.findAll();
     }
 
