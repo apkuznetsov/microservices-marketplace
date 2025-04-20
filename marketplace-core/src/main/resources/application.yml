@@ -51,7 +51,7 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db.changelog/db.changelog-master.xml
-    default-schema: ${SPRING_DATASOURCE_SCHEME:marketplace_core}
+    default-schema: ${SPRING_DATASOURCE_SCHEME:public}
 
 management:
   endpoints:
