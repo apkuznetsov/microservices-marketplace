@@ -6,5 +6,6 @@
 
     <include file="changeset/0002-create-setting-table.xml" relativeToChangelogFile="true"/>
     <include file="changeset/0003-insert-setting-greeting.xml" relativeToChangelogFile="true"/>
+    <include file="changeset/0004-insert-settings-starter-greeting.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
