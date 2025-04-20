@@ -3,10 +3,10 @@ package kuznetsov.marketplace.settings.service;
 
 import kuznetsov.marketplace.settings.dto.SettingDto;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface SettingServiceStarter {
 
-    Optional<SettingDto> findById(long categoryId);
+    List<SettingDto> findAll();
 
 }

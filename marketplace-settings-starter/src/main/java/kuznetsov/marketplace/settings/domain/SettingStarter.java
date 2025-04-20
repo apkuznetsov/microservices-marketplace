@@ -2,8 +2,6 @@ package kuznetsov.marketplace.settings.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -14,7 +12,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "product_category")
+@Table(name = "ss_setting")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -24,14 +22,10 @@ import lombok.ToString;
 public class SettingStarter {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
-    private Long id;
+    @Column(name = "code", nullable = false, length = 255)
+    private String code;
 
-    @Column(name = "name", nullable = false, length = 255)
-    private String name;
-
-    @Column(name = "cover_url", nullable = false, length = 255)
-    private String coverUrl;
+    @Column(name = "value", length = 255)
+    private String value;
 
 }

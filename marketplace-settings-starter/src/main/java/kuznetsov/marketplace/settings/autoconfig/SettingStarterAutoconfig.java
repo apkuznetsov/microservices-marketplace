@@ -1,6 +1,7 @@
 package kuznetsov.marketplace.settings.autoconfig;
 
 import liquibase.integration.spring.SpringLiquibase;
+import lombok.SneakyThrows;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -14,11 +15,15 @@ import javax.sql.DataSource;
 @Import(SettingEntityRegistrar.class)
 public class SettingStarterAutoconfig {
 
+    private static final String CHANGES_LOG = "classpath:db.changelog/db.changelog-settings-starter.xml";
+
     @Bean
-    public SpringLiquibase liquibase(DataSource dataSource) {
+    @SneakyThrows
+    public SpringLiquibase springLiquibaseSettingStarter(DataSource dataSource) {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource);
-        liquibase.setChangeLog("classpath:db.changelog/db.changelog-settings-starter.xml");
+        liquibase.setLiquibaseSchema(dataSource.getConnection().getSchema());
+        liquibase.setChangeLog(CHANGES_LOG);
 
         return liquibase;
     }

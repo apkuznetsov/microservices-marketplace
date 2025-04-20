@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -20,10 +22,9 @@ public class SettingControllerStarter {
     private final SettingServiceStarter settingService;
 
     @GetMapping(path = SETTING_STARTER_URL + "/{id}")
-    public SettingDto getSettingById(@PathVariable Long id) {
+    public List<SettingDto> getSettings(@PathVariable Long id) {
         log.info("Someone is trying to get setting with {} id.", id);
-        return settingService.findById(id)
-                .orElseThrow(SettingNotFoundException::new);
+        return settingService.findAll();
     }
 
     @ExceptionHandler(SettingNotFoundException.class)

@@ -1,3 +1,0 @@
-liquibase:
-  enabled: true
-  change-log: classpath:db.changelog/db.changelog-settings-starter.xml
