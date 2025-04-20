@@ -21,7 +21,6 @@
         <java.version>17</java.version>
         <spring-cloud.version>2022.0.2</spring-cloud.version>
         <resilience4j.version>1.5.0</resilience4j.version>
-        <springdoc.version>1.6.15</springdoc.version>
         <docker.image.prefix>marketplace</docker.image.prefix>
     </properties>
 
@@ -74,6 +73,11 @@
     </dependencyManagement>
 
     <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+
         <repository>
             <id>netflix-candidates</id>
             <name>Netflix Candidates</name>
@@ -166,21 +170,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
 
         <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-common</artifactId>
-            <version>${springdoc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${springdoc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-security</artifactId>
-            <version>${springdoc.version}</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
