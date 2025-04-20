@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>kuznetsov</groupId>
-    <artifactId>marketplace-starter-settings</artifactId>
+    <artifactId>marketplace-settings-starter</artifactId>
     <version>0.1.0</version>
     <name>marketplace-starter-settings</name>
     <description>marketplace-starter-settings</description>

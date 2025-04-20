@@ -21,7 +21,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ProductCategory {
+public class SettingStarter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
