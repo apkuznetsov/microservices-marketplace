@@ -1,12 +1,14 @@
-package kuznetsov.marketplace.settings;
+package kuznetsov.marketplace.settings.service;
 
+import kuznetsov.marketplace.settings.domain.ProductCategory;
+import kuznetsov.marketplace.settings.dto.ProductCategoryDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
-public interface ProductCategoryMapper {
+public interface StarterSettingMapper {
 
     ProductCategoryDto toDto(ProductCategory entity);
 

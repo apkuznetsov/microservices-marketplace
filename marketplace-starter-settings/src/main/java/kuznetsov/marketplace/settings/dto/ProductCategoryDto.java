@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.settings;
+package kuznetsov.marketplace.settings.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

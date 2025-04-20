@@ -1,6 +1,8 @@
-package kuznetsov.marketplace.settings;
+package kuznetsov.marketplace.settings.service;
 
 
+import kuznetsov.marketplace.settings.dto.ProductCategoryDto;
+import kuznetsov.marketplace.settings.repos.StarterSettingRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +11,10 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ProductCategoryServiceImpl implements ProductCategoryService {
+public class StarterSettingServiceImpl implements StarterSettingService {
 
-    private final ProductCategoryMapper categoryMapper;
-    private final ProductCategoryRepository categoryRepo;
+    private final StarterSettingMapper categoryMapper;
+    private final StarterSettingRepo categoryRepo;
 
     @Override
     public Optional<ProductCategoryDto> findById(long categoryId) {

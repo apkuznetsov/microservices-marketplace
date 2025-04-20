@@ -1,4 +1,4 @@
-package kuznetsov.marketplace.settings;
+package kuznetsov.marketplace.settings.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
