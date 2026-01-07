@@ -17,3 +17,5 @@ $ docker-compose -f docker/docker-compose.yml up
 ![](about/controller-auth-and-activation.png)
 
 ![](about/controller-seller-and-customer.png)
+
+![](about/controller-cashback.png)
