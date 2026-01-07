@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="005-create-indexes" author="developer">
+        <!-- Индексы для cards -->
+        <createIndex tableName="cards" indexName="idx_cards_user_id">
+            <column name="user_id"/>
+        </createIndex>
+
+        <createIndex tableName="cards" indexName="idx_cards_status">
+            <column name="status"/>
+        </createIndex>
+
+        <!-- Индексы для transactions -->
+        <createIndex tableName="transactions" indexName="idx_transactions_card_id">
+            <column name="card_id"/>
+        </createIndex>
+
+        <createIndex tableName="transactions" indexName="idx_transactions_created_at">
+            <column name="created_at"/>
+        </createIndex>
+
+        <createIndex tableName="transactions" indexName="idx_transactions_type">
+            <column name="type"/>
+        </createIndex>
+
+        <!-- Индексы для cashback_payments -->
+        <createIndex tableName="cashback_payments" indexName="idx_cashback_payments_card_id">
+            <column name="card_id"/>
+        </createIndex>
+
+        <createIndex tableName="cashback_payments" indexName="idx_cashback_payments_status">
+            <column name="status"/>
+        </createIndex>
+
+        <createIndex tableName="cashback_payments" indexName="idx_cashback_payments_period">
+            <column name="payment_period"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
